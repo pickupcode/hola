@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import json
+import psycopg2
+import sys
+import pprint
 # Create your views here.
 
 def login(request):
