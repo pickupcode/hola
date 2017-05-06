@@ -9,7 +9,7 @@ import pprint
 def login(request):
 
     data= {'resultado':True}
-    conn_string = "host='127.0.0.1' dbname='miapp_db' user='miapp' password='miapp' port='5432'"
+    conn_string = "dbname='miapp_db' user='miapp' password='miapp'"
     print ("Connecting to database\n	->%s" % (conn_string))
     conn = psycopg2.connect(conn_string)
     cursor= conn.cursor()
