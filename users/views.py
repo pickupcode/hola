@@ -9,13 +9,13 @@ import pprint
 def login(request):
 
     data= {'resultado':True}
-    conn_string = "dbname='miapp_db' user='miapp' password='miapp'"
-    print ("Connecting to database\n	->%s" % (conn_string))
-    conn = psycopg2.connect(conn_string)
+    #conn_string = "dbname='miapp_db' user='miapp' password='miapp'"
+    #print ("Connecting to database\n	->%s" % (conn_string))
+    conn = psycopg2.connect("dbname=miapp_db user=miapp password=miapp")
     cursor= conn.cursor()
-    cursor.execute("SELECT * FROM Usuario")
-    usuarios = cursor.fetchall
-    print(usuarios)
+    #cursor.execute("SELECT * FROM Usuario")
+    #usuarios = cursor.fetchall
+    #print(usuarios)
     json_data= json.dumps(data)
     print(json_data)
     return HttpResponse(json_data, content_type= 'application/json')
