@@ -16,7 +16,7 @@ def login(request):
     #cursor.execute("SELECT * FROM Usuario")
     print("conecto")
     #usuarios = cursor.fetchall
-    print(usuarios)
+    #print(usuarios)
     json_data= json.dumps(data)
     print(json_data)
     return HttpResponse(json_data, content_type= 'application/json')
