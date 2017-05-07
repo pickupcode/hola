@@ -16,12 +16,9 @@ def login(request):
     cursor= conn.cursor()
     cursor.execute('SELECT * FROM "Usuario"')
 
-    usuarios = []
-        for row in cursor.fetchall:
-            usuarios.append(dict(zip(columns, row)))
+    usuarios = cursor.fetchall
+    for rows in usuarios:
         print(usuarios)
-
-
     #json_usuarios= json.dumps(usuarios)
     #i=1
     #for bd in usuarios:
