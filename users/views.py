@@ -17,7 +17,8 @@ def login(request):
     cursor.execute('SELECT * FROM "Usuario"')
 
     usuarios = cursor.fetchall
-    print(usuarios)
+    usuarios_json= json.dumps(usuarios)
+    print(usuarios_json)
     #json_usuarios= json.dumps(usuarios)
     #i=1
     #for bd in usuarios:
