@@ -97,6 +97,8 @@ def register(request):
     cursor= conn.cursor()
     #query pinta usuario y clave
     cursor.execute('SELECT usuario, clave FROM "Usuario"')
+
+    usuarios = cursor.fetchall()
     for row in usuarios:
         print (row)
         #usuario ubicado
