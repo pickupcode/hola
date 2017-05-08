@@ -21,7 +21,7 @@ def login(request):
 
     usuarios = cursor.fetchall
     print(usuarios)
-    for row in usuarios
+    for row in usuarios:
         print (row)
     #json_usuarios= json.dumps(usuarios)
     #i=1
