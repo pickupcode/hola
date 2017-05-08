@@ -12,7 +12,7 @@ def login(request):
     data= {'resultado':True}
 
     usuariobd= "edvs"
-    clavebd = "ab"
+    clavebd = "abc"
 
 
     conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
@@ -48,18 +48,18 @@ def login(request):
             json_data= json.dumps(data)
             print(json_data)
             return HttpResponse(json_data, content_type= 'application/json')
-        #elif usuariobd in usuarios[i][0] and clavebd not in usuarios[i][1]:
-            #print("La contrasena no es correcta")
-            #data= {'resultado':False}
-            #json_data= json.dumps(data)
-            #print(json_data)
-            #return HttpResponse(json_data, content_type= 'application/json')
-        #elif usuariobd not in usuarios[i][0] and clavebd in usuarios[i][1]:
-            #print("La contrasena no es correcta")
-            #data= {'resultado':False}
-            #json_data= json.dumps(data)
-            #print(json_data)
-            #return HttpResponse(json_data, content_type= 'application/json')
+        elif usuariobd in usuarios[i][0] and clavebd not in usuarios[i][1]:
+            print("La contrasena no es correcta")
+            data= {'resultado':False}
+            json_data= json.dumps(data)
+            print(json_data)
+            return HttpResponse(json_data, content_type= 'application/json')
+        elif usuariobd not in usuarios[i][0] and clavebd in usuarios[i][1]:
+            print("La contrasena no es correcta")
+            data= {'resultado':False}
+            json_data= json.dumps(data)
+            print(json_data)
+            return HttpResponse(json_data, content_type= 'application/json')
         #elif usuariobd not in usuarios[i][0] and clavebd not in usuarios[i][1]:
             #print("La contrasena no es correcta")
             #data= {'resultado':False}
