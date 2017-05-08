@@ -27,7 +27,7 @@ def login(request):
     #print(usuarios)
     i=0
     for row in usuarios:
-        #print (row)
+        print (row)
         #usuario ubicado
         #print("usuario ubicado")
         #print(usuarios[1][0])
