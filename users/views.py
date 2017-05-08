@@ -18,8 +18,11 @@ def login(request):
     cursor= conn.cursor()
     cursor.execute('SELECT usuario FROM "Usuario"')
 
+
     usuarios = cursor.fetchall
     print(usuarios)
+    for row in usuarios
+        print (row)
     #json_usuarios= json.dumps(usuarios)
     #i=1
     #for bd in usuarios:
