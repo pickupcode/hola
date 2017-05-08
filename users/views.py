@@ -18,7 +18,7 @@ def login(request):
     print('aqui esta la conexion')
     print(conn)
     cursor= conn.cursor()
-    cursor.execute('SELECT usuario, clave FROM "Usuario"')
+    cursor.execute('SELECT clave FROM "Usuario"')
 
 
     usuarios = cursor.fetchall()
