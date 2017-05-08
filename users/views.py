@@ -48,30 +48,30 @@ def login(request):
             json_data= json.dumps(data)
             print(json_data)
             return HttpResponse(json_data, content_type= 'application/json')
-        elif usuariobd in usuarios[i][0] and clavebd not in usuarios[i][1]:
-            print("La contrasena no es correcta")
-            data= {'resultado':False}
-            json_data= json.dumps(data)
-            print(json_data)
-            return HttpResponse(json_data, content_type= 'application/json')
-        elif usuariobd not in usuarios[i][0] and clavebd in usuarios[i][1]:
-            print("La contrasena no es correcta")
-            data= {'resultado':False}
-            json_data= json.dumps(data)
-            print(json_data)
-            return HttpResponse(json_data, content_type= 'application/json')
-        elif usuariobd not in usuarios[i][0] and clavebd not in usuarios[i][1]:
-            print("La contrasena no es correcta")
-            data= {'resultado':False}
-            json_data= json.dumps(data)
-            print(json_data)
-            return HttpResponse(json_data, content_type= 'application/json')
-        #else:
-            #print("informacion incorrecta")
+        #elif usuariobd in usuarios[i][0] and clavebd not in usuarios[i][1]:
+            #print("La contrasena no es correcta")
             #data= {'resultado':False}
             #json_data= json.dumps(data)
             #print(json_data)
             #return HttpResponse(json_data, content_type= 'application/json')
+        #elif usuariobd not in usuarios[i][0] and clavebd in usuarios[i][1]:
+            #print("La contrasena no es correcta")
+            #data= {'resultado':False}
+            #json_data= json.dumps(data)
+            #print(json_data)
+            #return HttpResponse(json_data, content_type= 'application/json')
+        #elif usuariobd not in usuarios[i][0] and clavebd not in usuarios[i][1]:
+            #print("La contrasena no es correcta")
+            #data= {'resultado':False}
+            #json_data= json.dumps(data)
+            #print(json_data)
+            #return HttpResponse(json_data, content_type= 'application/json')
+        else:
+            print("informacion incorrecta")
+            data= {'resultado':False}
+            json_data= json.dumps(data)
+            print(json_data)
+            return HttpResponse(json_data, content_type= 'application/json')
         #puntero
         i= i+1
         print (i)
