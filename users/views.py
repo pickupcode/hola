@@ -99,6 +99,7 @@ def register(request):
     cursor.execute('SELECT usuario, clave FROM "Usuario"')
 
     usuarios = cursor.fetchall()
+    i= 0
     for row in usuarios:
         print (row)
         #usuario ubicado
