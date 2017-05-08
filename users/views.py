@@ -44,6 +44,10 @@ def login(request):
             print("clave")
             print(usuarios[i][1])
             print("el usuario existe")
+            data= {'resultado':True}
+            json_data= json.dumps(data)
+            print(json_data)
+            return HttpResponse(json_data, content_type= 'application/json')
         elif usuariobd in usuarios[i][0] and clavebd not in usuarios[i][1]:
             print("La contrasena no es correcta")
         else:
@@ -56,7 +60,7 @@ def login(request):
 
     json_data= json.dumps(data)
     print(json_data)
-    return HttpResponse(json_data, content_type= 'application/json')
+    #return HttpResponse(json_data, content_type= 'application/json')
 
 def register(request):
 
