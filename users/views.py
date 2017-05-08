@@ -42,7 +42,7 @@ def login(request):
         #logica
         if usuariobd in str(usuarios[i][0]):
             print("clave")
-            print(str(usuarios[i][1])
+            print(usuarios[i][1])
             print("el usuario existe")
         #puntero
         i= i+1
