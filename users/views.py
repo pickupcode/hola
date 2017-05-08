@@ -124,7 +124,7 @@ def register(request):
             print(usuarios[i][1])
 
             print("el no usuario existe")
-            if
+            
         i= i+1
 
 
