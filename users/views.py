@@ -9,6 +9,8 @@ import pprint
 
 def login(request):
 
+    #usuarioget=request.GET["username"]
+    #claveget=request.GET["password"]
 
     data= {'resultado':True}
 
