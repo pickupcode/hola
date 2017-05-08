@@ -114,8 +114,9 @@ def register(request):
         if usuariobd not in usuarios[i][0]:
             print("clave")
             print(usuarios[i][1])
-            
+
             print("el usuario existe")
+        i= i+1
 
 
 
