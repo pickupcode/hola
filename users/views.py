@@ -18,7 +18,7 @@ def login(request):
     print('aqui esta la conexion')
     print(conn)
     cursor= conn.cursor()
-    cursor.execute('SELECT clave FROM "Usuario"')
+    cursor.execute('SELECT usuario, clave FROM "Usuario"')
 
 
     usuarios = cursor.fetchall()
@@ -26,11 +26,11 @@ def login(request):
     i=1
     for row in usuarios:
         print (row)
-        print(usuarios[1])
+        print(usuarios[1][1])
         json_usuario= json.dumps(usuarios[1])
         print("el json")
         print(json_usuario)
-        
+
     #json_usuarios= json.dumps(usuarios)
     #i=1
     #for bd in usuarios:
