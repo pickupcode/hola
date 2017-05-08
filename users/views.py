@@ -44,18 +44,15 @@ def login(request):
             print("clave")
             print(usuarios[i][1])
             print("el usuario existe")
+        elif usuariobd in usuarios[i][0] and clavebd not in usuarios[i][1]:
+            print("La contraseña no es correcta")
+        else:
+            print("informacion incorrecta")
         #puntero
         i= i+1
         print (i)
 
-    #json_usuarios= json.dumps(usuarios)
-    #i=1
-    #for bd in usuarios:
-        #print(bd)
-        #json_users= json.dumps(bd)
-        #usuariobd= bd[i]['usuario']
-        #usuariobd= bd[i]['clave']
-        #autenticacion= auth.au
+    
 
     json_data= json.dumps(data)
     print(json_data)
