@@ -10,13 +10,15 @@ import pprint
 def login(request):
 
     data= {'resultado':True}
+    usuariobd= "edvs"
+    password = "abc"
 
 
     conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
     print('aqui esta la conexion')
     print(conn)
     cursor= conn.cursor()
-    cursor.execute('SELECT usuario FROM "Usuario"')
+    cursor.execute('SELECT usuario, clave FROM "Usuario"')
 
 
     usuarios = cursor.fetchall()
@@ -28,6 +30,7 @@ def login(request):
         json_usuario= json.dumps(usuarios[1])
         print("el json")
         print(json_usuario)
+        if
     #json_usuarios= json.dumps(usuarios)
     #i=1
     #for bd in usuarios:
