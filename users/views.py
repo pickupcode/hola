@@ -23,6 +23,7 @@ def login(request):
     #print(usuarios)
     for row in usuarios:
         print (row)
+        print(row[1])
     #json_usuarios= json.dumps(usuarios)
     #i=1
     #for bd in usuarios:
