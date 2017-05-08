@@ -30,7 +30,7 @@ def login(request):
         json_usuario= json.dumps(usuarios[1])
         print("el json")
         print(json_usuario)
-        if
+        
     #json_usuarios= json.dumps(usuarios)
     #i=1
     #for bd in usuarios:
