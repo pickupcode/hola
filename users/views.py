@@ -29,7 +29,7 @@ def login(request):
         #print (row)
         #usuario ubicado
         print("usuario ubicado")
-        print(usuarios[0][1])
+        print(usuarios[1][0])
         #clave ubicada
         print("clave del usuario ubicado")
         print(usuarios[1][1])
