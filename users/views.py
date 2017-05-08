@@ -44,8 +44,8 @@ def login(request):
             print("clave")
             print(usuarios[i][1])
             print("el usuario existe")
-        #elif usuariobd in usuarios[i][0] and clavebd not in usuarios[i][1]:
-            #print("La contraseña no es correcta")
+        elif usuariobd in usuarios[i][0] and clavebd not in usuarios[i][1]:
+            print("La contrasena no es correcta")
         else:
             print("informacion incorrecta")
         #puntero
