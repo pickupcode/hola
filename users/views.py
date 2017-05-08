@@ -9,6 +9,7 @@ import pprint
 
 def login(request):
 
+
     data= {'resultado':True}
 
     usuariobd= "pepe"
