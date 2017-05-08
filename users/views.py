@@ -10,7 +10,7 @@ import pprint
 def login(request):
 
     data= {'resultado':True}
-    
+
     usuariobd= "edvs"
     clavebd = "abc"
 
@@ -40,9 +40,10 @@ def login(request):
         #print("el json")
         #print(json_usuario)
         #logica
-        if usuariobd == usuarios[i][0] & clavebd == usuario[i][1]:
-            print("el usuario existe")
+        #if usuariobd == usuarios[i][0] & clavebd == usuario[i][1]:
+            #print("el usuario existe")
         i= i+1
+        print (i)
 
     #json_usuarios= json.dumps(usuarios)
     #i=1
