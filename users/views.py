@@ -11,7 +11,7 @@ def login(request):
 
     data= {'resultado':True}
 
-    usuariobd= "gon"
+    usuariobd= "pepe"
     clavebd = "abc"
 
 
