@@ -26,16 +26,20 @@ def login(request):
     #print(usuarios)
     i=1
     for row in usuarios:
-        print (row)
+        #print (row)
+        #usuario ubicado
+        print("usuario ubicado")
+        print(usuario[1][0])
         #clave ubicada
+        print("clave del usuario ubicado")
         print(usuarios[1][1])
         #convertir a json el usuario y clave no
-        json_usuario= json.dumps(usuarios[1])
-        print("el json")
-        print(json_usuario)
+        #json_usuario= json.dumps(usuarios[1])
+        #print("el json")
+        #print(json_usuario)
         #logica
-        if usuariobd = usuarios[i][0] and clavebd = usuario[i][1]:
-            print("el usuario existe")
+        #if usuariobd = usuarios[i][0] and clavebd = usuario[i][1]:
+            #print("el usuario existe")
 
     #json_usuarios= json.dumps(usuarios)
     #i=1
