@@ -11,7 +11,7 @@ def login(request):
 
     data= {'resultado':True}
 
-    usuariobd= "edv"
+    usuariobd= "gon"
     clavebd = "abc"
 
 
@@ -55,7 +55,7 @@ def login(request):
             print(json_data)
             return HttpResponse(json_data, content_type= 'application/json')
         elif usuariobd not in usuarios[i][0] and clavebd in usuarios[i][1]:
-            print("usuario no es registrado")
+            print("usuario no esta registrado")
             data= {'resultado':False}
             json_data= json.dumps(data)
             print(json_data)
