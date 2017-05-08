@@ -118,13 +118,14 @@ def register(request):
         #print(json_usuario)
         #logica
         if usuarioin not in usuarios[i][0]:
+            print(len(usuarios))
             print("usuario revisado")
             print(usuarios[i][0])
             print("clave")
             print(usuarios[i][1])
 
             print("el no usuario existe")
-            
+
         i= i+1
 
 
