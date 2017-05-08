@@ -18,6 +18,7 @@ def login(request):
     print('aqui esta la conexion')
     print(conn)
     cursor= conn.cursor()
+    #query pinta usuario y clave
     cursor.execute('SELECT usuario, clave FROM "Usuario"')
 
 
@@ -26,6 +27,7 @@ def login(request):
     i=1
     for row in usuarios:
         print (row)
+        #clave ubicada
         print(usuarios[1][1])
         json_usuario= json.dumps(usuarios[1])
         print("el json")
