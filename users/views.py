@@ -19,7 +19,7 @@ def login(request):
     cursor.execute('SELECT usuario FROM "Usuario"')
 
 
-    usuarios = cursor.fetchall
+    usuarios = cursor.fetchall()
     print(usuarios)
     for row in usuarios:
         print (row)
