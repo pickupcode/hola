@@ -40,7 +40,7 @@ def login(request):
         #print("el json")
         #print(json_usuario)
         #logica
-        if usuariobd in str(usuarios[i][0]):
+        if usuariobd in usuarios[i][0]:
             print("clave")
             print(usuarios[i][1])
             print("el usuario existe")
