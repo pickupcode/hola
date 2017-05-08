@@ -10,6 +10,7 @@ import pprint
 def login(request):
 
     data= {'resultado':True}
+    
     usuariobd= "edvs"
     clavebd = "abc"
 
@@ -24,7 +25,7 @@ def login(request):
 
     usuarios = cursor.fetchall()
     #print(usuarios)
-    i=1
+    i=0
     for row in usuarios:
         #print (row)
         #usuario ubicado
@@ -33,13 +34,15 @@ def login(request):
         #clave ubicada
         print("clave del usuario ubicado")
         print(usuarios[1][1])
+
         #convertir a json el usuario y clave no
         #json_usuario= json.dumps(usuarios[1])
         #print("el json")
         #print(json_usuario)
         #logica
-        #if usuariobd = usuarios[i][0] and clavebd = usuario[i][1]:
-            #print("el usuario existe")
+        if usuariobd == usuarios[i][0] & clavebd == usuario[i][1]:
+            print("el usuario existe")
+        i= i+1
 
     #json_usuarios= json.dumps(usuarios)
     #i=1
