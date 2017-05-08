@@ -21,9 +21,13 @@ def login(request):
 
     usuarios = cursor.fetchall()
     #print(usuarios)
+    i=1
     for row in usuarios:
         print (row)
         print(usuarios[1])
+        json_usuario= json.dumps(usuarios[1])
+        print(el json)
+        print(json_usuario)
     #json_usuarios= json.dumps(usuarios)
     #i=1
     #for bd in usuarios:
