@@ -41,7 +41,8 @@ def login(request):
         #print(json_usuario)
         #logica
         if usuariobd in str(usuarios[i][0]):
-            print("el usuario existe")
+            if usuariobd in str(usuarios[i][1]):
+                print("el usuario existe")
         #puntero
         i= i+1
         print (i)
