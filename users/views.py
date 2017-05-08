@@ -100,14 +100,17 @@ def register(request):
 
     usuarios = cursor.fetchall()
     i= 0
+    k= 0
+    j= 0
+
     for row in usuarios:
         print (row)
         #usuario ubicado
         #print("usuario ubicado")
-        print(usuarios[1][0])
+        #print(usuarios[1][0])
         #clave ubicada
         #print("clave del usuario ubicado")
-        print(usuarios[1][1])
+        #print(usuarios[1][1])
 
         #convertir a json el usuario y clave no
         #json_usuario= json.dumps(usuarios[1])
@@ -115,10 +118,13 @@ def register(request):
         #print(json_usuario)
         #logica
         if usuarioin not in usuarios[i][0]:
+            print("usuario revisado")
+            print(usuarios[i][0])
             print("clave")
             print(usuarios[i][1])
 
-            print("el usuario existe")
+            print("el no usuario existe")
+            if
         i= i+1
 
 
