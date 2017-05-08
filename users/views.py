@@ -20,7 +20,7 @@ def login(request):
 
 
     usuarios = cursor.fetchall()
-    print(usuarios)
+    #print(usuarios)
     for row in usuarios:
         print (row)
     #json_usuarios= json.dumps(usuarios)
