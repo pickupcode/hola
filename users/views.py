@@ -119,12 +119,18 @@ def register(request):
         #logica
         if usuarioin not in usuarios[i][0]:
             print(len(usuarios))
+            total= len(usuarios)
             print("usuario revisado")
             print(usuarios[i][0])
             print("clave")
             print(usuarios[i][1])
+            print("contador")
+            j= j+1
+            print(j)
 
             print("el no usuario existe")
+            if j==total:
+                print("insertar el usuario")
 
         i= i+1
 
