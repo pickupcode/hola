@@ -113,7 +113,7 @@ def register(request):
         #print("el json")
         #print(json_usuario)
         #logica
-        if usuariobd not in usuarios[i][0]:
+        if usuarioin not in usuarios[i][0]:
             print("clave")
             print(usuarios[i][1])
 
