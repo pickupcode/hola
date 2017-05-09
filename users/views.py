@@ -136,7 +136,7 @@ def register(request):
                 cursor2= conn.cursor()
                 data=(nombrein,usuarioin,passwordin)
                 print(data)
-                cursor2.execute("INSERT INTO usuarios (nombre, usuario, clave) VALUES (%s,%s,%s)",data)
+                cursor2.execute("""INSERT INTO usuarios (nombre, usuario, clave) VALUES (%s,%s,%s)""",data)
                 #p= Usuario(nombre= nombrein, usuario= usuarioin, clave= passwordin)
                 #p.save()
                 data= {'resultado':True}
@@ -151,7 +151,3 @@ def register(request):
             return HttpResponse(json_data, content_type= 'application/json')
 
         i= i+1
-
-
-
-    
