@@ -130,7 +130,7 @@ def register(request):
             j= j+1
             print(j)
 
-            print("el no usuario existe")
+            
             if j==total:
 
                 print("insertar el usuario")
