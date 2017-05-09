@@ -130,12 +130,12 @@ def register(request):
 
             print("el no usuario existe")
             if j==total:
-                conn2 = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
+
                 print("insertar el usuario")
-                cursor2= conn2.cursor()
+                cursor= conn.cursor()
                 data=(nombrein,usuarioin,passwordin)
                 print(data)
-                cursor2.execute('INSERT INTO "Usuario" (nombre, usuario, clave) VALUES (%s, %s, %s)',data)
+                cursor.execute('INSERT INTO "Usuario" (nombre, usuario, clave) VALUES (%s, %s, %s)',data)
 
                 print("usuario creado con exito")
         else:
