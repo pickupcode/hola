@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from users.models import Usuario
 
 import json
 import psycopg2
@@ -23,7 +24,7 @@ def login(request):
     print(conn)
     cursor= conn.cursor()
     #query pinta usuario y clave
-    cursor.execute('SELECT usuario, clave FROM "Usuario"')
+    cursor.execute('SELECT usuario, clave FROM usuarios')
 
 
     usuarios = cursor.fetchall()
@@ -136,6 +137,8 @@ def register(request):
                 data=(nombrein,usuarioin,passwordin)
                 print(data)
                 cursor2.execute("INSERT INTO usuarios (nombre, usuario, clave) VALUES ('sda', 'sad', 'abc')")
+                p= Usuario(nombre= nombrein, usuario= usuarioin, clave= passwordin)
+                p.save()
 
                 print("usuario creado con exito")
         else:
