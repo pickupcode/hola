@@ -52,7 +52,8 @@ def login(request):
             print("clave")
             print(usuarios[i][1])
             print("el usuario existe")
-            data= {'resultado':True}
+            #data= {'resultado':True}
+            data={'User':{'usuario': usuariobd, 'clave': clavebd}}
             json_data= json.dumps(data)
             print(json_data)
             return HttpResponse(json_data, content_type= 'application/json')
