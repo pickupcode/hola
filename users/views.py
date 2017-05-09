@@ -139,15 +139,19 @@ def register(request):
                 cursor2.execute("INSERT INTO usuarios (nombre, usuario, clave) VALUES (%s,%s,%s)",data)
                 #p= Usuario(nombre= nombrein, usuario= usuarioin, clave= passwordin)
                 #p.save()
+                data= {'resultado':True}
+                json_data= json.dumps(data)
+                return HttpResponse(json_data, content_type= 'application/json')
 
                 print("usuario creado con exito")
         else:
             print("el usuario ya existe")
+            data= {'resultado':False}
+            json_data= json.dumps(data)
+            return HttpResponse(json_data, content_type= 'application/json')
 
         i= i+1
 
 
 
-    data= {'resultado':False}
-    json_data= json.dumps(data)
-    return HttpResponse(json_data, content_type= 'application/json')
+    
