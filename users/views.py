@@ -137,8 +137,8 @@ def register(request):
                 data=(nombrein,usuarioin,passwordin)
                 print(data)
                 cursor2.execute("INSERT INTO usuarios (nombre, usuario, clave) VALUES ('sda', 'sad', 'abc')")
-                p= Usuario(nombre= nombrein, usuario= usuarioin, clave= passwordin)
-                p.save()
+                #p= Usuario(nombre= nombrein, usuario= usuarioin, clave= passwordin)
+                #p.save()
 
                 print("usuario creado con exito")
         else:
