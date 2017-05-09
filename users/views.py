@@ -132,10 +132,10 @@ def register(request):
             if j==total:
 
                 print("insertar el usuario")
-                cursor= conn.cursor()
+                cursor2= conn.cursor()
                 data=(nombrein,usuarioin,passwordin)
                 print(data)
-                cursor.execute('INSERT INTO "Usuario" (nombre, usuario, clave) VALUES (%s, %s, %s)',data)
+                cursor2.execute('INSERT INTO "Usuario" (nombre, usuario, clave) VALUES ('sda', 'sad', 'abc'))
 
                 print("usuario creado con exito")
         else:
