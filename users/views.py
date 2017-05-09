@@ -135,7 +135,7 @@ def register(request):
                 data=(nombrein,usuarioin,passwordin)
                 print(data)
                 cursor2.execute('INSERT INTO "Usuario" (nombre, usuario, clave) VALUES (%s, %s, %s)',data)
-                print(cursor2.execute('INSERT INTO public."Usuario" (nombre, usuario, clave) VALUES ('asd', 'asd', 'abc')')
+                print(cursor2.execute('INSERT INTO public."Usuario" (nombre, usuario, clave) VALUES ("asd", "asd", "abc")')
                 print("usuario creado con exito")
         else:
             print("el usuario ya existe")
