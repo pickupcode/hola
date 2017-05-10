@@ -157,8 +157,8 @@ def register(request):
             return HttpResponse(json_data, content_type= 'application/json')
 
         i= i+1
-    def listar(request):
-        print("el usuario ya existe")
-        data= {'categorias':[]}
-        json_data= json.dumps(data)
-        return HttpResponse(json_data, content_type= 'application/json')
+def listar(request):
+    print("el usuario ya existe")
+    data= {'categorias':[]}
+    json_data= json.dumps(data)
+    return HttpResponse(json_data, content_type= 'application/json')
