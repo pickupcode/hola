@@ -53,7 +53,7 @@ def login(request):
             print(usuarios[i][1])
             print("el usuario existe")
             #data= {'resultado':True}
-            data={'User':{'usuario': usuariobd, 'clave': clavebd}}
+            data={'usuario': usuariobd, 'clave': clavebd}
             json_data= json.dumps(data)
             print(json_data)
             return HttpResponse(json_data, content_type= 'application/json')
@@ -157,3 +157,8 @@ def register(request):
             return HttpResponse(json_data, content_type= 'application/json')
 
         i= i+1
+    def listar(request):
+        print("el usuario ya existe")
+        data= {'categorias':[]}
+        json_data= json.dumps(data)
+        return HttpResponse(json_data, content_type= 'application/json')
