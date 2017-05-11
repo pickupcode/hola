@@ -118,12 +118,15 @@ def user_exists(usuario):
     return False if rs.rowcount == 0 else False
 
 def register(request):
+    nombrein= "pruebausere"
+    usuarioin= "prueba"
+    passwordin= "abc"
 
 
 
-    nombrein= request.GET["name"]
-    usuarioin= request.GET["username"]
-    passwordin= request.GET["password"]
+    #nombrein= request.GET["name"]
+    #usuarioin= request.GET["username"]
+    #passwordin= request.GET["password"]
 
     user_exists = user_exists(usuarioin)
 
