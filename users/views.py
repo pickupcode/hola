@@ -36,18 +36,12 @@ def login(request):
     # Result Set
     rs = cursor.fetchall()
     data= {'usuario': "", 'clave': ""}
-    if rs.rowcount == 0:
-        #Usuario no registrado en la bd
-        pass
-
-    else:
+    if rs.rowcount > 0:
         #rs.1 es la clave
         if clavebd == rs[1]:
             #Usuario y Password Correcto
             data = {'usuario': usuariobd, 'clave': clavebd}
-        else:
-            #Password incorrecta
-            pass
+
     json_data= json.dumps(data)
     print(json_data)
     return HttpResponse(json_data, content_type= 'application/json')
