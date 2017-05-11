@@ -12,6 +12,7 @@ def login(request):
     print("usuario geteado")
 
     usuarioget=request.GET["username"]
+    print(usuarioget)
     print("clave geteado")
     claveget=request.GET["password"]
 
