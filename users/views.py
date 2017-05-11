@@ -35,21 +35,21 @@ def login(request):
 
     # Result Set
     rs = cursor.fetchall()
+    data= {'usuario': "", 'clave': ""}
     if rs.rowcount == 0:
         #Usuario no registrado en la bd
-        data= {'usuario': "", 'clave': ""}
+        pass
 
     else:
         #rs.1 es la clave
         if clavebd == rs[1]:
             #Usuario y Password Correcto
-            data={'usuario': usuariobd, 'clave': clavebd}
-
+            data = {'usuario': usuariobd, 'clave': clavebd}
         else:
             #Password incorrecta
-            data= {'usuario': "", 'clave': ""}
+            pass
     json_data= json.dumps(data)
-    print(json_data)       
+    print(json_data)
     return HttpResponse(json_data, content_type= 'application/json')
 
     # usuarios = cursor.fetchall()
