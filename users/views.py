@@ -163,7 +163,7 @@ def register(request):
     for row in usuarios:
 
         print (row)
-        
+
         print("usuario ubicado")
         print(usuarios[1][0])
         #clave ubicada
@@ -203,14 +203,14 @@ def register(request):
                  return HttpResponse(json_data, content_type= 'application/json')
 
                  print("usuario creado con exito")
-         else:
+        else:
 
              print("el usuario ya existe")
              data= {'resultado':False}
              json_data= json.dumps(data)
              return HttpResponse(json_data, content_type= 'application/json')
 
-         i= i+1
+        i= i+1
 def listar(request):
     print("el usuario ya existe")
     data= {'categorias':[]}
