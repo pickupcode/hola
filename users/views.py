@@ -9,9 +9,11 @@ import pprint
 # Create your views here.
 
 def login(request):
+    print("usuario geteado")
 
-    #usuarioget=request.GET["username"]
-    #claveget=request.GET["password"]
+    usuarioget=request.GET["username"]
+    print("clave geteado")
+    claveget=request.GET["password"]
 
     #data= {'resultado':True}
 
