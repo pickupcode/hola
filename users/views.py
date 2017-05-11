@@ -163,7 +163,7 @@ def register(request):
     for row in usuarios:
 
         print (row)
-        usuario ubicado
+        
         print("usuario ubicado")
         print(usuarios[1][0])
         #clave ubicada
