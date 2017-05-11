@@ -62,13 +62,13 @@ def login(request):
             return HttpResponse(json_data, content_type= 'application/json')
         elif usuariobd in usuarios[i][0] and clavebd not in usuarios[i][1]:
             print("La contrasena no es correcta")
-            data= {'resultado':False}
+            data= {'usuario': "", 'clave': ""}
             json_data= json.dumps(data)
             print(json_data)
             return HttpResponse(json_data, content_type= 'application/json')
         elif usuariobd not in usuarios[i][0] and clavebd in usuarios[i][1]:
             print("usuario no esta registrado")
-            data= {'resultado':False}
+            data= {'usuario': "", 'clave': ""}
             json_data= json.dumps(data)
             print(json_data)
             return HttpResponse(json_data, content_type= 'application/json')
@@ -80,7 +80,7 @@ def login(request):
             #return HttpResponse(json_data, content_type= 'application/json')
         else:
             print("informacion incorrecta")
-            data= {'resultado':False}
+            data= {'usuario': "", 'clave': ""}
             json_data= json.dumps(data)
             print(json_data)
             return HttpResponse(json_data, content_type= 'application/json')
