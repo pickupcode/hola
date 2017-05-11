@@ -9,17 +9,17 @@ import pprint
 # Create your views here.
 
 def login(request):
-    print("usuario geteado")
+    #print("usuario geteado")
 
-    usuarioget=request.GET["username"]
-    print(usuarioget)
-    print("clave geteado")
-    claveget=request.GET["password"]
+    #usuarioget=request.GET["username"]
+    #print(usuarioget)
+    #print("clave geteado")
+    #claveget=request.GET["password"]
 
     #data= {'resultado':True}
 
-    usuariobd= "pepe"
-    clavebd = "abc"
+    usuariobd= request.GET["username"]
+    clavebd = request.GET["password"]
     data2={'User':{'usuario': usuariobd, 'clave': clavebd}}
     json_data2= json.dumps(data2)
     print("nuevo json")
