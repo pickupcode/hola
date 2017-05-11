@@ -165,7 +165,7 @@ def register(request):
         print(usuarios[1][0])
         #clave ubicada
         #print("clave del usuario ubicado")
-    #     #print(usuarios[1][1])
+    #   #print(usuarios[1][1])
     #
     #     #convertir a json el usuario y clave no
     #     #json_usuario= json.dumps(usuarios[1])
