@@ -31,7 +31,8 @@ def login(request):
     # print(conn)
     cursor= conn.cursor()
     #query pinta usuario y clave
-    cursor.execute('SELECT usuario, clave FROM usuarios WHERE usuario = %s', % usuariobd)
+    query = 'SELECT usuario, clave FROM usuarios WHERE usuario = %s' % usuariobd
+    cursor.execute(query)
 
     # Result Set
     rs = cursor.fetchall()
@@ -109,7 +110,8 @@ def login(request):
 def user_exists(usuario):
     conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
     cursor= conn.cursor()
-    cursor.execute('SELECT usuario, clave FROM usuarios WHERE usuario = %s', % usuario)
+    query = 'SELECT usuario, clave FROM usuarios WHERE usuario = %s' % usuario
+    cursor.execute(query)
 
     # Result Set
     rs = cursor.fetchall()
@@ -129,7 +131,8 @@ def register(request):
     if user_exists == False:
         cursor= conn.cursor()
         valores = (nombrein, usuarioin, passwordin)
-        cursor.execute("""INSERT INTO usuarios (nombre, usuario, clave) VALUES (%s,%s,%s)""", % valores)
+        query = 'INSERT INTO usuarios (nombre, usuario, clave) VALUES (%s,%s,%s)' % valores
+        cursor.execute(query)
         conn.commit()
         data= {'resultado': True}
 
