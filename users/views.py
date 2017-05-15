@@ -113,8 +113,8 @@ def test(request):
         if current_category != previous_category:
             categoria = {'nombre' : result[1], 'perdidos' : []}
             data['categorias'].append(categoria)
-        else:
-            #Do something
+
+        #Do something
         perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : [5]}
         data['categorias'][current_category]['perdidos'].append(perdido)
         # current_category = result[0]
