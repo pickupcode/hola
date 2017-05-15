@@ -79,12 +79,12 @@ def listar(request):
     rs = cursor.fetchall()
     data = {'categorias':[]}
     categoria = {'nombre' : "", 'perdidos' : []}
-    current_category_index = -1
+    current_category_index = 0
     for result in rs:
         current_category = rs[current_category_index][0]
-        previous_category = rs[current_category_index-1][0] if rs.index(result) > 0 else ""
+        previous_category = rs[current_category_index-1][0] if current_category_index > 0 else ""
         if current_category != previous_category:
-            current_category_index += 1
+            current_category_index += 1 if current_category_index > 0 else 0
             categoria = {'nombre' : result[1], 'perdidos' : []}
             data['categorias'].append(categoria)
 
@@ -97,7 +97,7 @@ def listar(request):
 
 
 def test(request):
-    data = {'test' : "Ay Lmao"}    
+    data = {'test' : "Ay Lmao"}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
