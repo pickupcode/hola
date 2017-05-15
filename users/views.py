@@ -101,24 +101,21 @@ def test(request):
     cursor= conn.cursor()
     cursor2 = conn.cursor()
     #query pinta usuario y clave
-    query = "SELECT id, nombre FROM \"Categoria\""
-    query2 = "SELECT dni, firstname, edad, descripcion, lastname, categoria FROM \"perdidos\""
+    query = "SELECT c.id, c.nombre, p.dni, p.firstname, p.edad, p.descripcion, p.lastname, p.categoria FROM \"Categoria\" as c join \"perdidos\" as p on c.id = p.categoria"
     cursor.execute(query)
-    cursor2.execute(query2)
     # Result Set
     rs = cursor.fetchall()
-    rs2 = cursor2.fetchall()
-    data= [{'categorias':[]}]
-    dato = ""
-    count = 0
-    for e in rs:
-        data[0]['categorias'].append({'perdidos':[],'nombre': e[1]})
-        for i in rs2:
-            if e[0]==i[5]:
-                data[0]['categorias'][count]['perdidos'].append({'dni': i[0],'nombre': i[1],'age': i[2],'description': i[3],'apellido': i[4]})
-        count = count + 1
-    data1 = data[0]
-    json_data= json.dumps(data1)
+    data= {'test':len(rs)}
+    # dato = ""
+    # count = 0
+    # for e in rs:
+    #     data[0]['categorias'].append({'perdidos':[],'nombre': e[1]})
+    #     for i in rs2:
+    #         if e[0]==i[5]:
+    #             data[0]['categorias'][count]['perdidos'].append({'dni': i[0],'nombre': i[1],'age': i[2],'description': i[3],'apellido': i[4]})
+    #     count = count + 1
+    # data1 = data[0]
+    json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
 #
