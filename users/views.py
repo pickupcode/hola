@@ -119,6 +119,8 @@ def test(request):
     #             data[0]['categorias'][count]['perdidos'].append({'dni': i[0],'nombre': i[1],'age': i[2],'description': i[3],'apellido': i[4]})
     #     count = count + 1
     # data1 = data[0]
+
+    # un comentario
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
