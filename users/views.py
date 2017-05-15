@@ -101,14 +101,19 @@ def test(request):
     cursor= conn.cursor()
     cursor2 = conn.cursor()
     #query pinta usuario y clave
-    query = "SELECT c.id, c.nombre, p.dni, p.firstname, p.edad, p.descripcion, p.lastname, p.categoria FROM \"Categoria\" as c join \"perdidos\" as p on c.id = p.categoria"
+    query = "SELECT c.id, c.nombre, p.dni, p.firstname, p.edad, p.descripcion, p.lastname, p.categoria FROM \"Categoria\" as c join \"perdidos\" as p on c.id = p.categoria order by c.id"
     cursor.execute(query)
     # Result Set
     rs = cursor.fetchall()
     data= {'categorias':[]}
+    previous_category = rs[0][0]
     for result in rs:
-        perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : [5]}
-        data['perdido'] = perdido
+
+        # current_category = result[0]
+        categoria = {'nombre' : result[1], 'perdidos' : []}
+        data['categorias'].extend(categoria)
+        # perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : [5]}
+        # data['perdido'] = perdido
 
     # dato = ""
     # count = 0
