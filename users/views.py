@@ -105,17 +105,24 @@ def test(request):
     cursor.execute(query)
     # Result Set
     rs = cursor.fetchall()
-    data= {'categorias':[]}
-    previous_category = "empty"
+    data = {'categorias':[]}
+    categoria = {'nombre' : "", 'perdidos' : []}
     for result in rs:
-        current_category = result[0]
+        current_category = rs[rs.index(result)][0]
         previous_category = rs[rs.index(result)-1][0] if rs.index(result) > 0 else ""
         if current_category != previous_category:
             categoria = {'nombre' : result[1], 'perdidos' : []}
             data['categorias'].append(categoria)
+        else:
+            #Do something
+
+    perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : [5]}
+    data['categorias'][current_category]['perdidos'].append(perdido)
+
+
         # current_category = result[0]
 
-        # perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : [5]}
+
         # data['perdido'] = perdido
 
     # dato = ""
