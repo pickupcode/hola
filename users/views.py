@@ -107,7 +107,7 @@ def test(request):
     rs = cursor.fetchall()
     data= {'categorias':[]}
     for result in rs:
-        perdido = {'nombre' : "nombre"}
+        perdido = {'nombre' : rs['nombre']}
         data['perdido'] = perdido
 
     # dato = ""
