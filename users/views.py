@@ -105,7 +105,11 @@ def test(request):
     cursor.execute(query)
     # Result Set
     rs = cursor.fetchall()
-    data= {'test':len(rs)}
+    data= {'categorias':[]}
+    for result in rs:
+        perdido = {'dni' : result["dni"], 'nombre' : result[3], 'apellido' : result['lastname']}
+        data[perdido] = perdido
+
     # dato = ""
     # count = 0
     # for e in rs:
