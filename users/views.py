@@ -106,9 +106,10 @@ def test(request):
     # Result Set
     rs = cursor.fetchall()
     data= {'categorias':[]}
-    previous_category = rs[0][0]
+    previous_category = "empty"
     for result in rs:
         current_category = result[0]
+        previous_category = [rs.index(result)-1] if rs.index(result) > 0 else ""
         if current_category != previous_category:
             categoria = {'nombre' : result[1], 'perdidos' : []}
             data['categorias'].append(categoria)
