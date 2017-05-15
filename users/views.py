@@ -96,4 +96,9 @@ def listar(request):
 
 
 
+def test(request):
+    data = {'test':""}
+    json_data= json.dumps(data)
+    return HttpResponse(json_data, content_type= 'application/json')
+
 #
