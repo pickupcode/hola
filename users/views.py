@@ -111,7 +111,7 @@ def test(request):
         current_category = result[0]
         if current_category != previous_category:
             categoria = {'nombre' : result[1], 'perdidos' : []}
-            data['categorias'].extend(categoria)
+            data['categorias'].append(categoria)
         # current_category = result[0]
 
         # perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : [5]}
