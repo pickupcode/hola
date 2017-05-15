@@ -31,7 +31,7 @@ def login(request):
             clave = rs[0][2]
             data = {'nombre': nombre,'usuario': usuario, 'clave': clave}
 
-    ßjson_data= json.dumps(data)
+    json_data= json.dumps(data)
     print(json_data)
     return HttpResponse(json_data, content_type= 'application/json')
 
