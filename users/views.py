@@ -108,7 +108,8 @@ def test(request):
     data = {'categorias':[]}
     categoria = {'nombre' : "", 'perdidos' : []}
     for result in rs:
-        current_category = rs[rs.index(result)][0]
+        current_category_index = rs.index(result)
+        current_category = rs[current_category_index][0]
         previous_category = rs[rs.index(result)-1][0] if rs.index(result) > 0 else ""
         if current_category != previous_category:
             categoria = {'nombre' : result[1], 'perdidos' : []}
@@ -116,7 +117,7 @@ def test(request):
 
         #Do something
         perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : [5]}
-        data['categorias'][current_category]['perdidos'].append(perdido)
+        data['categorias'][current_category_index]['perdidos'].append(perdido)
         # current_category = result[0]
 
 
