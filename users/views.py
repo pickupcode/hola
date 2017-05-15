@@ -99,7 +99,6 @@ def listar(request):
 def test(request):
     conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
     cursor= conn.cursor()
-    cursor2 = conn.cursor()
     #query pinta usuario y clave
     query = "SELECT c.id, c.nombre, p.dni, p.firstname, p.edad, p.descripcion, p.lastname, p.categoria FROM \"Categoria\" as c join \"perdidos\" as p on c.id = p.categoria order by c.id"
     cursor.execute(query)
@@ -107,8 +106,8 @@ def test(request):
     rs = cursor.fetchall()
     data = {'categorias':[]}
     categoria = {'nombre' : "", 'perdidos' : []}
+    current_category_index = -1
     for result in rs:
-        current_category_index = -1
         current_category = rs[current_category_index][0]
         previous_category = rs[current_category_index-1][0] if rs.index(result) > 0 else ""
         if current_category != previous_category:
@@ -116,25 +115,9 @@ def test(request):
             categoria = {'nombre' : result[1], 'perdidos' : []}
             data['categorias'].append(categoria)
 
-        #Do something
-        perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : [5]}
+        perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : result[5]}
         data['categorias'][current_category_index]['perdidos'].append(perdido)
-        # current_category = result[0]
 
-
-        # data['perdido'] = perdido
-
-    # dato = ""
-    # count = 0
-    # for e in rs:
-    #     data[0]['categorias'].append({'perdidos':[],'nombre': e[1]})
-    #     for i in rs2:
-    #         if e[0]==i[5]:
-    #             data[0]['categorias'][count]['perdidos'].append({'dni': i[0],'nombre': i[1],'age': i[2],'description': i[3],'apellido': i[4]})
-    #     count = count + 1
-    # data1 = data[0]
-
-    # un comentario
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
