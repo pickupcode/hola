@@ -108,9 +108,10 @@ def test(request):
     data= {'categorias':[]}
     previous_category = rs[0][0]
     for result in rs:
-
-        # current_category = result[0]
-        categoria = {'nombre' : result[1], 'perdidos' : []}
+        current_category = result[0]
+        if current_category != previous_category:
+            categoria = {'nombre' : result[1], 'perdidos' : []}
+        # current_category = result[0]        
         data['categorias'].extend(categoria)
         # perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : [5]}
         # data['perdido'] = perdido
