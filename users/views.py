@@ -103,7 +103,7 @@ def clue(request):
     descripcion = request.GET["descripcion"]
     data= {'resultado':False}
 
-    if descripcion != "" and  asunto != "":
+    if descripcion != "" and  asunto != "" and len(descripcion) <= 100 and len(asunto) <= 30:
         valores = (idUsuario, idPerdido, asunto,descripcion)
         conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
         cursor= conn.cursor()
