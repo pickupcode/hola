@@ -108,9 +108,12 @@ def clue(request):
     data= {'resultado':False}
     cursor= conn.cursor()
     valores = (idUsuario, idPerdido, asunto,descripcion)
-    query = "INSERT INTO pistas (idusuario, idperdido, asunto, descripcion) VALUES ('%s','%s','%s','%s')" % valores
+    query = "INSERT INTO pista (idusuario, idperdido, asunto, descripcion) VALUES ('%s','%s','%s','%s')" % valores
+
 
     if descripcion != descripcion.empty or  asunto != asunto.empty:
+        cursor.execute(query)
+        conn.commit()
         data= {'resultado': True}
         json_data= json.dumps(data)
         return HttpResponse(json_data, content_type= 'application/json')
