@@ -102,13 +102,10 @@ def clue(request):
     idPerdido = 2
     asunto = sdadddsa
     descripcion = sdasddds
-
-
-
     conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
     data= {'resultado':False}
     cursor= conn.cursor()
-    valores = (idUsuario, idPerdido, asunto,descripcion)
+    valores = (1, 2, sadadad,sadsadsd)
     query = "INSERT INTO pista (idusuario, idperdido, asunto, descripcion) VALUES ('%s','%s','%s','%s')" % valores
 
 
