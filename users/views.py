@@ -97,13 +97,12 @@ def listar(request):
     return HttpResponse(json_data, content_type= 'application/json')
 
 def clue(request):
-    print ("entro a clues dasdad")
-
+    print ("entro a clues2")
     conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
     data= {'resultado':False}
     cursor= conn.cursor()
-
-    query = "INSERT INTO pista (idusuario, idperdido, asunto, descripcion) VALUES ('%s','%s','%s','%s')" % (1,2,sadsad,sadad)
+    valores = (iduser, idlost, asunto,descripcion)
+    query = "INSERT INTO pista (idusuario, idperdido, asunto, descripcion) VALUES ('%s','%s','%s','%s')" % valores
 
 
     if descripcion != descripcion.empty or  asunto != asunto.empty:
