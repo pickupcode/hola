@@ -102,7 +102,17 @@ def clue(request):
     asunto = request.GET["asunto"]
     descripcion = request.GET["descripcion"]
 
-    data= {'resultado': True}
+    conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
+    data= {'resultado':False}
+    cursor= conn.cursor()
+    valores = (idUsuario, idPerdido, asunto,descripcion)
+    query = "INSERT INTO pistas (idusuario, idperdido, asunto, descripcion) VALUES ('%s','%s','%s','%s')" % valores
+
+    if descripcion != descripcion.empty or  asunto != asunto.empty:
+        data= {'resultado': True}
+        json_data= json.dumps(data)
+        return HttpResponse(json_data, content_type= 'application/json')
+
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
