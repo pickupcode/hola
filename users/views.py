@@ -101,6 +101,7 @@ def clue(request):
     #idPerdido = request.GET["idPerdido"]
     #asunto = request.GET["asunto"]
     #descripcion = request.GET["descripcion"]
+    print ("entro a clues")
     idUsuario = 1
     idPerdido = 1
     asunto = "Persona vista nuevamente"
