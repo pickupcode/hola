@@ -97,10 +97,10 @@ def listar(request):
     return HttpResponse(json_data, content_type= 'application/json')
 
 def clue(request):
-    idUsuario = request.GET["idUsuario"]
-    idPerdido = request.GET["idPerdido"]
-    asunto = request.GET["asunto"]
-    descripcion = request.GET["descripcion"]
+    idUsuario = 1
+    idPerdido = 2
+    asunto = sdadddsa
+    descripcion = sdasddds
     print ("entro a clues")
 
 
