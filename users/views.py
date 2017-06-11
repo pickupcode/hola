@@ -6,6 +6,7 @@ import json
 import psycopg2
 import sys
 import pprint
+import base64
 # Create your views here.
 
 def login(request):
@@ -89,8 +90,8 @@ def listar(request):
             current_category_index += 1
             categoria = {'nombre' : result[1], 'perdidos' : []}
             data['categorias'].append(categoria)
-
-        perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : result[5], 'imagenRaw' : result[8]}
+        imagenRaw = base64.b64encode(result[8])
+        perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : result[5], 'imagen' : imagenRaw}
         data['categorias'][previous_category_index]['perdidos'].append(perdido)
 
     json_data= json.dumps(data)
