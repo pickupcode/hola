@@ -73,7 +73,7 @@ def listar(request):
     conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
     cursor= conn.cursor()
     #query pinta usuario y clave
-    query = "SELECT c.id, c.nombre, p.dni, p.firstname, p.edad, p.descripcion, p.lastname, p.categoria FROM \"Categoria\" as c join \"perdidos\" as p on c.id = p.categoria order by c.id"
+    query = "SELECT c.id, c.nombre, p.dni, p.firstname, p.edad, p.descripcion, p.lastname, p.categoria, p.imagen FROM \"Categoria\" as c join \"perdidos\" as p on c.id = p.categoria order by c.id"
     cursor.execute(query)
     # Result Set
     rs = cursor.fetchall()
@@ -90,7 +90,7 @@ def listar(request):
             categoria = {'nombre' : result[1], 'perdidos' : []}
             data['categorias'].append(categoria)
 
-        perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : result[5]}
+        perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : result[5], 'imagenRaw' : result[8]}
         data['categorias'][previous_category_index]['perdidos'].append(perdido)
 
     json_data= json.dumps(data)
