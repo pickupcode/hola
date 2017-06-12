@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from users.models import Usuario
+from django.core import serializers
 
 import json
 import psycopg2
@@ -122,8 +123,9 @@ def clue(request):
 def test(request):
     lista_usuarios= Usuario.objects.all
     print(lista_usuarios)
-    data = {'test' : "Ay Lmao ay lmao sdad2", 'usuarios': lista_usuarios}
+    json_estudiantes= serializers.serialize('json',lista_usuarios )
+    data = {'test' : "Ay Lmao ay lmao sdad2"}
     json_data= json.dumps(data)
-    return HttpResponse(json_data, content_type= 'application/json')
+    return HttpResponse(json_estudiantes, content_type= 'application/json')
 
 #
