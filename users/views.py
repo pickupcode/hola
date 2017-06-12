@@ -9,6 +9,7 @@ import pprint
 # Create your views here.
 
 def login(request):
+    print("prueba")
     usuariobd= request.GET["username"]
     clavebd = request.GET["password"]
 
