@@ -9,7 +9,7 @@ import pprint
 # Create your views here.
 
 def login(request):
-    print("prueba")
+
     usuariobd= request.GET["username"]
     clavebd = request.GET["password"]
 
@@ -120,8 +120,8 @@ def clue(request):
 
 
 def test(request):
-    print("prueba")
-    data = {'test' : "Ay Lmao ay lmao sdad"}
+
+    data = {'test' : "Ay Lmao ay lmao sdad2"}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
