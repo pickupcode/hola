@@ -120,7 +120,7 @@ def clue(request):
 
 
 def test(request):
-    lista_usuarios= Usuario.object.all
+    lista_usuarios= Usuario.objects.all
     print(lista_usuarios)
     data = {'test' : "Ay Lmao ay lmao sdad2", 'usuarios': lista_usuarios}
     json_data= json.dumps(data)
