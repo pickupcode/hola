@@ -121,7 +121,7 @@ def clue(request):
 
 def test(request):
     print("prueba")
-    data = {'test' : "Ay Lmao ay lmao"}
+    data = {'test' : "Ay Lmao ay lmao sdad"}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
