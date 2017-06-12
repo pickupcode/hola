@@ -121,8 +121,8 @@ def clue(request):
 
 
 def test(request):
-    lista_usuarios= Usuario.objects.all
-    
+    lista_usuarios= Usuario.object
+
     json_estudiantes= serializers.serialize('json',lista_usuarios)
     print(json_estudiantes)
     data = {'test' : "Ay Lmao ay lmao sdad2"}
