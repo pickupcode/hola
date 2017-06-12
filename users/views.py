@@ -104,7 +104,7 @@ def clue(request):
     data= {'resultado':False}
     conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
 
-    if descripcion != "" and  asunto != "" and len(descripcion) <= 100 and len(asunto) <= 30:
+    if descripcion != "" and  asunto != "" and len(descripcion) <= 400 and len(asunto) <= 30:
         valores = (idUsuario, idPerdido, asunto,descripcion)
         cursor= conn.cursor()
         query = "INSERT INTO pista (idusuario, idperdido, asunto, descripcion) VALUES ('%s','%s','%s','%s')" % valores
