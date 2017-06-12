@@ -120,8 +120,9 @@ def clue(request):
 
 
 def test(request):
-
-    data = {'test' : "Ay Lmao ay lmao sdad2"}
+    lista_usuarios= Usuario.object.all
+    print(lista_usuarios)
+    data = {'test' : "Ay Lmao ay lmao sdad2", 'usuarios': lista_usuarios}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
