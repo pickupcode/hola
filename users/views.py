@@ -117,6 +117,11 @@ def clue(request):
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
+def report(request):
+    data= {'resultado': True}
+    json_data= json.dumps(data)
+    return HttpResponse(json_data, content_type= 'application/json')
+
 
 def test(request):
     data = {'test' : "Ay Lmao"}

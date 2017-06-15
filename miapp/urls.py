@@ -23,7 +23,8 @@ urlpatterns = [
     url(r'^register/', views.register),
     url(r'^list/', views.listar),
     url(r'^test/', views.test),
-    url(r'^clue/', views.clue)
+    url(r'^clue/', views.clue),
+    url(r'^/report', views.report)
     #url(r'^login/?username=(?P<username>[a-z A-Z]+)$'+
     #r'^&password=(?P<password>[a-z A-Z]+)$', views.login),
     #url(r'^register/?name=(?P<name>[a-z A-Z]+)$'+  r'^&username=(?P<username>[a-z A-Z]+)$'+
