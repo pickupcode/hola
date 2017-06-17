@@ -125,8 +125,8 @@ def test(request):
     #ya se pueden hacer querys con django!!!!!!!!!!!!!!
     json_estudiantes= serializers.serialize('json',lista_usuarios)
     print(json_estudiantes)
-    for usuario in json_estudiantes:
-        print(usuario[2])
+    for usuario in lista_usuarios:
+        print(usuario.nombre)
     data = {'test' : "Ay Lmao ay lmao sdad2"}
     json_data= json.dumps(data)
     return HttpResponse(json_estudiantes, content_type= 'application/json')
