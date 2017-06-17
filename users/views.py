@@ -123,6 +123,8 @@ def clue(request):
 def test(request):
     lista_usuarios= Usuarios.objects.all()
     #ya se pueden hacer querys con django!!!!!!!!!!!!!!
+    for usuario in lista_usuarios:
+        print(usuario[2][1])
     json_estudiantes= serializers.serialize('json',lista_usuarios)
     print(json_estudiantes)
     data = {'test' : "Ay Lmao ay lmao sdad2"}
