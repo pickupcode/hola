@@ -126,7 +126,7 @@ def test(request):
     json_estudiantes= serializers.serialize('json',lista_usuarios)
     print(json_estudiantes)
     for usuario in json_estudiantes:
-        print(usuario[2][1])
+        print(usuario[2])
     data = {'test' : "Ay Lmao ay lmao sdad2"}
     json_data= json.dumps(data)
     return HttpResponse(json_estudiantes, content_type= 'application/json')
