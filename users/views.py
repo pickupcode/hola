@@ -14,33 +14,33 @@ def login(request):
     usuariobd= request.GET["username"]
     clavebd = request.GET["password"]
 
-    conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
+    #conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
 
-    cursor= conn.cursor()
+    #cursor= conn.cursor()
     #query pinta usuario y clave
-    query = "SELECT nombre, usuario, clave FROM usuarios WHERE usuario = '%s'" % usuariobd
-    cursor.execute(query)
-    usuario_jango= Usuarios.objects.filter(usuario="edvs")
+    #query = "SELECT nombre, usuario, clave FROM usuarios WHERE usuario = '%s'" % usuariobd
+    #cursor.execute(query)
+    usuario_jango= Usuarios.objects.filter(usuario=usuariobd)
     print("imprimiste un usuario filtrado")
     for i in usuario_jango.iterator():
         print(i.usuario)
         print(i.nombre)
-        #print(i.clave)
+        print(i.clave)
     # Result Set
-    rs = cursor.fetchall()
-    data= {'nombre' : "", 'usuario' : "", 'clave' : ""}
-    if len(rs) > 0:
+    #rs = cursor.fetchall()
+        data= {'nombre' : "", 'usuario' : "", 'clave' : ""}
+        if len(rs) > 0:
         #rs.1 es la clave
-        if clavebd == rs[0][2]:
+            if clavebd == i.clave:
             #Usuario y Password Correcto
-            nombre = rs[0][0]
-            usuario = rs[0][1]
-            clave = rs[0][2]
-            data = {'nombre': nombre,'usuario': usuario, 'clave': clave}
+                nombre = i.nombre
+                usuario = i.usuario
+                clave = i.clave
+                data = {'nombre': nombre,'usuario': usuario, 'clave': clave}
 
-    json_data= json.dumps(data)
-    print(json_data)
-    return HttpResponse(json_data, content_type= 'application/json')
+                json_data= json.dumps(data)
+                print(json_data)
+                return HttpResponse(json_data, content_type= 'application/json')
 
 def user_exists(usuario):
     conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
