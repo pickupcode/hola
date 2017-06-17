@@ -127,6 +127,6 @@ def test(request):
     print(json_estudiantes)
     data = {'test' : "Ay Lmao ay lmao sdad2"}
     json_data= json.dumps(data)
-    return HttpResponse(json_data, content_type= 'application/json')
+    return HttpResponse(json_estudiantes, content_type= 'application/json')
 
 #
