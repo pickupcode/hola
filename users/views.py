@@ -22,7 +22,7 @@ def login(request):
     cursor.execute(query)
     usuario_jango= Usuarios.objects.filter(usuario="edvs")
     print("imprimiste un usuario filtrado")
-    for i,j in usuario_jango.iterator():
+    for i in usuario_jango.iterator():
         print(i.usuario)
         print(i.nombre)
         #print(i.clave)
