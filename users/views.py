@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from users.models import Usuario
+#from users.models import Usuario
 from django.core import serializers
 
 import json
