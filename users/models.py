@@ -20,7 +20,7 @@ class Perdidos(models.Model):
     coordenada = models.CharField(max_length=50, blank=True, null=True)
     categoria = models.ForeignKey(Categoria, models.DO_NOTHING, db_column='categoria', blank=True, null=True)
     dni = models.CharField(max_length=10, blank=True, null=True)
-    imagen = models.BinaryField(blank=True, null=True)
+    imagen = models.CharField(max_length=200, blank=True, null=True)
 
     class Meta:
         managed = False
