@@ -20,7 +20,9 @@ def login(request):
     #query pinta usuario y clave
     query = "SELECT nombre, usuario, clave FROM usuarios WHERE usuario = '%s'" % usuariobd
     cursor.execute(query)
-
+    usuario_jango= Usuarios.objects.filter(usuario="edvs")
+    print("imprimiste un usuario filtrado")
+    print(usuario_jango)
     # Result Set
     rs = cursor.fetchall()
     data= {'nombre' : "", 'usuario' : "", 'clave' : ""}
