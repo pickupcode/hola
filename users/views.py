@@ -134,14 +134,14 @@ def test(request):
     lista_pistas= Pista.objects.all()
     for pista in lista_pistas:
         print(pista.idpista)
-        print("--------")
+        #print("--------")
     #ya se pueden hacer querys con django!!!!!!!!!!!!!!
     json_estudiantes= serializers.serialize('json',lista_usuarios)
-    print(json_estudiantes)
+    #print(json_estudiantes)
     #p= Usuarios(nombre="prueba32", usuario="p32", clave="abc")
     #p.save()
-    for usuario in lista_usuarios:
-        print(usuario.usuario)
+    #for usuario in lista_usuarios:
+        #print(usuario.usuario)
     data = {'test' : "Ay Lmao ay lmao sdad2"}
     json_data= json.dumps(data)
     return HttpResponse(json_estudiantes, content_type= 'application/json')
