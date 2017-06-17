@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from users.models import Usuarios
+from users.models import Pista
 from django.core import serializers
 
 import json
@@ -62,7 +63,7 @@ def register(request):
 
     user_does_exist = user_exists(usuarioin)
 
-    conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
+    #conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
     data= {'resultado':False}
     if user_does_exist == False:
         #cursor= conn.cursor()
