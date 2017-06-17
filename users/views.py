@@ -47,11 +47,12 @@ def user_exists(usuario):
     cursor= conn.cursor()
     query = "SELECT usuario FROM usuarios WHERE usuario = '%s'"  % usuario
     cursor.execute(query)
-
+    usuario_jango= Usuarios.objects.filter(usuario=usuario)
     # Result Set
     rs = cursor.fetchall()
     user_does_exist = len(rs) == 1
     return True if user_does_exist else False
+    print("funciona")
 
 def register(request):
 
@@ -130,6 +131,8 @@ def test(request):
     #ya se pueden hacer querys con django!!!!!!!!!!!!!!
     json_estudiantes= serializers.serialize('json',lista_usuarios)
     print(json_estudiantes)
+    p= Usuarios(nombre="prueba32", usuario="p32", clave="abc")
+    p.save()
     for usuario in lista_usuarios:
         print(usuario.usuario)
     data = {'test' : "Ay Lmao ay lmao sdad2"}
