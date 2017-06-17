@@ -29,7 +29,7 @@ def login(request):
     # Result Set
     #rs = cursor.fetchall()
         data= {'nombre' : "", 'usuario' : "", 'clave' : ""}
-        if len(rs) > 0:
+        if usuario_jango.count > 0:
         #rs.1 es la clave
             if clavebd == i.clave:
             #Usuario y Password Correcto
