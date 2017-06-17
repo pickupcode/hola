@@ -22,7 +22,7 @@ def login(request):
     cursor.execute(query)
     usuario_jango= Usuarios.objects.filter(usuario="edvs")
     print("imprimiste un usuario filtrado")
-    print(usuario_jango)
+    print(usuario_jango.usuario)
     # Result Set
     rs = cursor.fetchall()
     data= {'nombre' : "", 'usuario' : "", 'clave' : ""}
