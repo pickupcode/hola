@@ -22,9 +22,8 @@ def login(request):
     cursor.execute(query)
     usuario_jango= Usuarios.objects.filter(usuario="edvs")
     print("imprimiste un usuario filtrado")
-    for i,j in usuario_jango:
-        print(j.usuario)
-        print(i.nombre)
+    print(usuario_jango.0.usuario)
+    print(usuario_jango.0.clave)
         #print(i.clave)
     # Result Set
     rs = cursor.fetchall()
