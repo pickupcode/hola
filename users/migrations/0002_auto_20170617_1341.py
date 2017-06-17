@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('descripcion', models.CharField(blank=True, max_length=300, null=True)),
                 ('coordenada', models.CharField(blank=True, max_length=50, null=True)),
                 ('dni', models.CharField(blank=True, max_length=10, null=True)),
-                ('imagen', models.BinaryField(blank=True, null=True)),
+                ('imagen', models.CharField(max_length=200, blank=True, null=True)),
             ],
             options={
                 'db_table': 'perdidos',
