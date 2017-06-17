@@ -24,6 +24,8 @@ def login(request):
     print("imprimiste un usuario filtrado")
     for i in usuario_jango:
         print(i.usuario)
+        print(i.nombre)
+        print(i.clave)
     # Result Set
     rs = cursor.fetchall()
     data= {'nombre' : "", 'usuario' : "", 'clave' : ""}
