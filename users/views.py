@@ -154,8 +154,14 @@ def test(request):
         #print(usuario.usuario)
     #armando el json listar
     lista_perdido= Perdidos.objects.select_related()
+    lista_categoria= categoria.objects.select_related()
+    categoria_json= serializers.serialize('json',lista_categoria)
+    print(categoria_json)
+    print("otro json")
     perdido_json= serializers.serialize('json',lista_perdido)
     print(perdido_json)
+    data = {'categorias':[]}
+    categoria = {'nombre' : "", 'perdidos' : []}
     for perdido in lista_perdido:
         print(perdido.firstname)
 
