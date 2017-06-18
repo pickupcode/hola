@@ -155,7 +155,7 @@ def test(request):
     #armando el json listar
     lista_perdido= Perdidos.objects.select_related()
     for perdido in lista_perdido:
-        print(perdido.nombre)
+        print(perdido.firstname)
 
     data = {'test' : "Ay Lmao ay lmao sdad2"}
     json_data= json.dumps(data)
