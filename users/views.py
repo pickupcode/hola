@@ -139,7 +139,7 @@ def clue(request):
 def test(request):
     lista_usuarios= Usuarios.objects.all()
     lista_pistas= Pista.objects.all()
-    
+
     for pista in lista_pistas:
         print(pista.idpista)
         #print("--------")
@@ -151,6 +151,10 @@ def test(request):
     #for usuario in lista_usuarios:
         #print(usuario.usuario)
     #armando el json listar
+    lista_perdido= Perdido.objects.select_related()
+    for perdido in lista_perdido:
+        print(perdido.categoria)
+
     data = {'test' : "Ay Lmao ay lmao sdad2"}
     json_data= json.dumps(data)
     return HttpResponse(json_estudiantes, content_type= 'application/json')
