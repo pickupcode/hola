@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from users.models import Usuarios
 from users.models import Pista
+from users.models import Perdidos
+from users.models import Categoria
 from django.core import serializers
 
 import json
@@ -151,7 +153,7 @@ def test(request):
     #for usuario in lista_usuarios:
         #print(usuario.usuario)
     #armando el json listar
-    lista_perdido= Perdido.objects.select_related()
+    lista_perdido= Perdidos.objects.select_related()
     for perdido in lista_perdido:
         print(perdido.categoria)
 
