@@ -94,7 +94,9 @@ def listar(request):
     previous_category_index = -1
     for result in rs:
         current_result_category_id = result[0]
+        print(current_result_category_id)
         previous_result_category_id = rs[rs.index(result)-1][0] if current_category_index >= 0 else ""
+        print(previous_result_category_id)
         if current_result_category_id != previous_result_category_id:
             previous_category_index = current_category_index
             current_category_index += 1
