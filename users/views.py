@@ -142,8 +142,8 @@ def test(request):
     lista_usuarios= Usuarios.objects.all()
     lista_pistas= Pista.objects.all()
 
-    for pista in lista_pistas:
-        print(pista.idpista)
+    #for pista in lista_pistas:
+        #print(pista.idpista)
         #print("--------")
     #ya se pueden hacer querys con django!!!!!!!!!!!!!!
     json_estudiantes= serializers.serialize('json',lista_usuarios)
