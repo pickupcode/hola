@@ -30,7 +30,7 @@ def login(request):
     # Result Set
     #rs = cursor.fetchall()
         data= {'nombre' : "", 'usuario' : "", 'clave' : ""}
-        if usuario_jango.count > 0:
+        if usuario_jango.count() > 0:
         #rs.1 es la clave
             if clavebd == i.clave:
             #Usuario y Password Correcto
@@ -51,7 +51,7 @@ def user_exists(usuario):
     usuario_jango= Usuarios.objects.filter(usuario=usuario)
     # Result Set
     #rs = cursor.fetchall()
-    user_does_exist = usuario_jango.count == 1
+    user_does_exist = usuario_jango.count() == 1
     return True if user_does_exist else False
 
 
