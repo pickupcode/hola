@@ -139,7 +139,7 @@ def clue(request):
 def test(request):
     lista_usuarios= Usuarios.objects.all()
     lista_pistas= Pista.objects.all()
-    print(lista_pistas.1)
+    
     for pista in lista_pistas:
         print(pista.idpista)
         #print("--------")
