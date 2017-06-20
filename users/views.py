@@ -161,6 +161,7 @@ def test(request):
     #perdido_json= serializers.serialize('json',lista_perdido)
     #print(perdido_json)
     i=0
+    j=0
     data = {'categorias':[]}
     categoria = {'nombre' : "", 'perdidos' : []}
     #for perdido in lista_perdido:
@@ -179,8 +180,9 @@ def test(request):
             perdido= {'nombre': perdido.firstname, 'apellido': perdido.lastname, 'dni': perdido.dni, 'age': perdido.edad, 'description': perdido.descripcion, 'imagen': perdido.imagen}
             #print(perdido)
             #print(data['categorias'][i]['perdidos'])
-            data['categorias']['perdidos'].append(perdido)
+            data['categorias'][i]['perdidos'][j].append(perdido)
             i= i+1
+            j= j+1
     print(data)
     json_categoriasxperdidos= json.dumps(data)
 
