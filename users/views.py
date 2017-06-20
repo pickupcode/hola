@@ -186,8 +186,8 @@ def test(request):
                 j= j+1
             elif perdido.categoria == "MA60":
                 data['categorias'][1]['perdidos'].append(perdid)
-            else:
-                data['categorias'][2]['perdidos'].append(perdid)
+            #else:
+                #data['categorias'][2]['perdidos'].append(perdid)
     #print(data)
     json_categoriasxperdidos= json.dumps(data)
 
