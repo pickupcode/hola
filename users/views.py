@@ -180,10 +180,14 @@ def test(request):
             perdido= {'nombre': perdido.firstname, 'apellido': perdido.lastname, 'dni': perdido.dni, 'age': perdido.edad, 'description': perdido.descripcion, 'imagen': perdido.imagen}
             #print(perdido)
             #print(data['categorias'][0]['perdidos'])
-            #if perdido.categoria ==
-            data['categorias'][0]['perdidos'].append(perdido)
-            i= i+1
-            j= j+1
+            if perdido.categoria == "E1825":
+                data['categorias'][0]['perdidos'].append(perdido)
+                i= i+1
+                j= j+1
+            elif perdido.categoria == "MA60":
+                data['categorias'][1]['perdidos'].append(perdido)
+            else:
+                data['categorias'][2]['perdidos'].append(perdido)
     #print(data)
     json_categoriasxperdidos= json.dumps(data)
 
