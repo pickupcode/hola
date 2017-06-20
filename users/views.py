@@ -172,9 +172,9 @@ def test(request):
         lista_perdido= Perdidos.objects.filter(categoria=pk_categoria).order_by('categoria')
         perdido_json=serializers.serialize('json',lista_perdido)
         print(perdido_json)
-        #for perdido in lista_perdido.iterator():
-            #categoria= {'nombre': categ.nombre, 'perdidos': []}
-            #data['categorias'].append(categoria)
+        for perdido in lista_perdido.iterator():
+            categoria= {'nombre': categ.nombre, 'perdidos': []}
+            data['categorias'].append(categoria)
 
 
 
