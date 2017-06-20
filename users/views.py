@@ -179,12 +179,14 @@ def test(request):
             data['categorias'].append(categoria)
             perdido= {'nombre': perdido.firstname, 'apellido': perdido.lastname, 'dni': perdido.dni, 'age': perdido.edad, 'description': perdido.descripcion, 'imagen': perdido.imagen}
             #print(perdido)
+            perdido_json= json.dumps(perdido)
+            data_json= json.dumps(data)
             #print(data['categorias'][i]['perdidos'])
-            data['categorias'][i]['perdidos'].push(perdido)
+            data_json['categorias'][i]['perdidos'].push(perdido_json)
             i= i+1
             j= j+1
     print(data)
-    json_categoriasxperdidos= json.dumps(data)
+    #json_categoriasxperdidos= json.dumps(data)
 
 
 
