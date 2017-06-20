@@ -153,8 +153,8 @@ def test(request):
     #for usuario in lista_usuarios:
         #print(usuario.usuario)
     #armando el json listar
-    lista_perdido= Perdidos.objects.select_related()
-    lista_categoria= Categoria.objects.all()
+    #lista_perdido= Perdidos.objects.select_related()
+    lista_categoria= Categoria.objects.all().order_by('id')
     categoria_json= serializers.serialize('json',lista_categoria)
     #print(categoria_json)
     #print("otro json")
@@ -164,10 +164,17 @@ def test(request):
     categoria = {'nombre' : "", 'perdidos' : []}
     #for perdido in lista_perdido:
         #print(perdido.firstname)
+    print("ids categorias")
     for categ in lista_categoria.iterator():
-        print("ids categorias")
+
         pk_categoria= categ.id
         print(pk_categoria)
+        lista_perdido= Perdidos.objects.filter(id=pk_categoria).order_by('categoria')
+        for perdido in lista_perdido.iterator():
+            categoria= {'nombre': categ.nombre, 'perdidos': []}
+            data['categorias'].append(categoria)
+    print(data)
+
 
 
     data = {'test' : "Ay Lmao ay lmao sdad2"}
