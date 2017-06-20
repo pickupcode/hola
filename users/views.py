@@ -177,8 +177,8 @@ def test(request):
             categoria= {'nombre': categ.nombre, 'perdidos': []}
             data['categorias'].append(categoria)
             perdido= {'nombre': perdido.firstname, 'apellido': perdido.lastname, 'dni': perdido.dni, 'age': perdido.edad, 'description': perdido.descripcion, 'imagen': perdido.imagen}
-            print(perdido)
-            print(data['categorias'][i]['perdidos'])
+            #print(perdido)
+            print(data['categorias'][0]['perdidos'])
             #data['categorias'][i]['perdidos'].append(perdido)
             i= i+1
     print(data)
