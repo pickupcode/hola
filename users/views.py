@@ -182,11 +182,12 @@ def test(request):
             data['categorias'][i]['perdidos'].append(perdido)
             i= i+1
     print(data)
+    json_categoriasxperdidos= json.dumps(data)
 
 
 
-    data = {'test' : "Ay Lmao ay lmao sdad2"}
-    json_data= json.dumps(data)
-    return HttpResponse(json_estudiantes, content_type= 'application/json')
+    #data = {'test' : "Ay Lmao ay lmao sdad2"}
+    #json_data= json.dumps(data)
+    return HttpResponse(json_categoriasxperdidos, content_type= 'application/json')
 
 #
