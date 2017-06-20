@@ -170,9 +170,9 @@ def test(request):
         pk_categoria= categ.id
         print(pk_categoria)
         lista_perdido= Perdidos.objects.filter(id=pk_categoria).order_by('categoria')
-        for perdido in lista_perdido.iterator():
-            categoria= {'nombre': categ.nombre, 'perdidos': []}
-            data['categorias'].append(categoria)
+        #for perdido in lista_perdido.iterator():
+            #categoria= {'nombre': categ.nombre, 'perdidos': []}
+            #data['categorias'].append(categoria)
     print(data)
 
 
