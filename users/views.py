@@ -180,7 +180,7 @@ def test(request):
             perdido= {'nombre': perdido.firstname, 'apellido': perdido.lastname, 'dni': perdido.dni, 'age': perdido.edad, 'description': perdido.descripcion, 'imagen': perdido.imagen}
             #print(perdido)
             print(data['categorias'][0]['perdidos'])
-            data['categorias'][i]['perdidos'].append(perdido)
+            data['categorias'][0]['perdidos'].append(perdido)
             i= i+1
             j= j+1
     print(data)
