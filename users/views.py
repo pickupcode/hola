@@ -162,11 +162,11 @@ def test(request):
     print(perdido_json)
     data = {'categorias':[]}
     categoria = {'nombre' : "", 'perdidos' : []}
-    for perdido in lista_perdido:
+    #for perdido in lista_perdido:
         #print(perdido.firstname)
-    for categoria in lista_categoria.iterator():
+    for categ in lista_categoria.iterator():
         print("ids categorias")
-        pk_categoria= categoria.id
+        pk_categoria= categ.id
         print(pk_categoria)
 
 
