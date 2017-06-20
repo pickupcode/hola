@@ -159,7 +159,7 @@ def test(request):
     #print(categoria_json)
     #print("otro json")
     #perdido_json= serializers.serialize('json',lista_perdido)
-    print(perdido_json)
+    #print(perdido_json)
     data = {'categorias':[]}
     categoria = {'nombre' : "", 'perdidos' : []}
     #for perdido in lista_perdido:
