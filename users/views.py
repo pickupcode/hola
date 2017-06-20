@@ -182,8 +182,8 @@ def test(request):
             #print(perdido)
             #print(data['categorias'][0]['perdidos'])
             data['categorias'][i]['perdidos'].append(perdid)
-                i= i+1
-                j= j+1
+            i= i+1
+            j= j+1
 
     #print(data)
     json_categoriasxperdidos= json.dumps(data)
