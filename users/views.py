@@ -160,6 +160,7 @@ def test(request):
     #print("otro json")
     #perdido_json= serializers.serialize('json',lista_perdido)
     #print(perdido_json)
+    i=0
     data = {'categorias':[]}
     categoria = {'nombre' : "", 'perdidos' : []}
     #for perdido in lista_perdido:
@@ -175,6 +176,11 @@ def test(request):
         for perdido in lista_perdido.iterator():
             categoria= {'nombre': categ.nombre, 'perdidos': []}
             data['categorias'].append(categoria)
+            perdido= {'nombre': perdido.firstname, 'apellido': perdido.lastname, 'dni': perdido.dni, 'age': perdido.edad, 'description': perdido.descripcion, 'imagen': perdido.imagen}
+            print(perdido)
+            print(data['categorias'][i]['perdidos'])
+            #data['categorias'][i]['perdidos'].append(perdido)
+            i= i+1
     print(data)
 
 
