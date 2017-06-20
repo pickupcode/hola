@@ -175,8 +175,8 @@ def test(request):
         perdido_json=serializers.serialize('json',lista_perdido)
         #print(perdido_json)
         for perdido in lista_perdido.iterator():
-            categoria= {'nombre': categ.nombre, 'perdidos': []}
-            data['categorias'].append(categoria)
+            categori= {'nombre': categ.nombre, 'perdidos': []}
+            data['categorias'].append(categori)
             perdido= {'nombre': perdido.firstname, 'apellido': perdido.lastname, 'dni': perdido.dni, 'age': perdido.edad, 'description': perdido.descripcion, 'imagen': perdido.imagen}
             #print(perdido)
             #print(data['categorias'][0]['perdidos'])
