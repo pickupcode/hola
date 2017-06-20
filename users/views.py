@@ -176,14 +176,15 @@ def test(request):
         #print(perdido_json)
         categori= {'nombre': categ.nombre, 'perdidos': []}
         data['categorias'].append(categori)
+        i= i+1
         for perdido in lista_perdido.iterator():
 
             perdid= {'nombre': perdido.firstname, 'apellido': perdido.lastname, 'dni': perdido.dni, 'age': perdido.edad, 'description': perdido.descripcion, 'imagen': perdido.imagen}
             #print(perdido)
             #print(data['categorias'][0]['perdidos'])
-            data['categorias'][i]['perdidos'].append(perdid)
-            i= i+1
-            j= j+1
+            data['categorias'][i-1]['perdidos'].append(perdid)
+
+
 
     #print(data)
     json_categoriasxperdidos= json.dumps(data)
