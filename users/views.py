@@ -175,7 +175,7 @@ def test(request):
         for perdido in lista_perdido.iterator():
             categoria= {'nombre': categ.nombre, 'perdidos': []}
             data['categorias'].append(categoria)
-
+    print(data)
 
 
 
