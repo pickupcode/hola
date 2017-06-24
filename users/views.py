@@ -14,8 +14,8 @@ import pprint
 # Create your views here.
 
 def login(request):
-    usuariobd= request.GET["username"]
-    clavebd = request.GET["password"]
+    usuariobd= request.POST["username"]
+    clavebd = request.POST["password"]
     usuario_jango= Usuarios.objects.filter(usuario=usuariobd)
     for i in usuario_jango.iterator():
         data= {'nombre' : "", 'usuario' : "", 'clave' : ""}
@@ -36,12 +36,12 @@ def user_exists(usuario):
 
 
 def register(request):
-    nombrein= request.GET["name"]
-    usuarioin= request.GET["username"]
-    passwordin= request.GET["password"]
-    dniin= request.GET.get("dni",None)
-    emailin= request.GET.get("email",None)
-    edadin = request.GET.get("age",None)
+    nombrein= request.POST["name"]
+    usuarioin= request.POST["username"]
+    passwordin= request.POST["password"]
+    dniin= request.POST.get("dni",None)
+    emailin= request.POST.get("email",None)
+    edadin = request.POST.get("age",None)
     usuario_jango= Usuarios.objects.filter(usuario=usuarioin)
     user_does_exist = user_exists(usuarioin)
     data= {'result':False}
@@ -52,7 +52,7 @@ def register(request):
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
-def listar(request):
+def list(request):
     lista_categoria= Categoria.objects.all().order_by('id')
     categoria_json= serializers.serialize('json',lista_categoria)
     data = {'categories':[]}
@@ -72,10 +72,10 @@ def listar(request):
     return HttpResponse(json_categoriasxperdidos, content_type= 'application/json')
 
 def clue(request):
-    idUsuario = request.GET["idUser"]
-    idPerdido = request.GET["idLostPerson"]
-    asunto = request.GET["subject"]
-    descripcion = request.GET["description"]
+    idUsuario = request.POST["idUser"]
+    idPerdido = request.POST["idLostPerson"]
+    asunto = request.POST["subject"]
+    descripcion = request.POST["description"]
     data= {'result':False}
     if descripcion != "" and  asunto != "" and len(descripcion) <= 400 and len(asunto) <= 30:
         p= Pista(idusuario=idUsuario, idperdido= idPerdido, asunto= asunto, descripcion=descripcion)
@@ -85,10 +85,10 @@ def clue(request):
     return HttpResponse(json_data, content_type= 'application/json')
 
 def report(request):
-    idusuario = request.GET["idUser"]
-    idperdido = request.GET.get("idLostPerson",None)
-    nombre = request.GET.get("name",None)
-    detalle = request.GET["report"]
+    idusuario = request.POST["idUser"]
+    idperdido = request.POST.get("idLostPerson",None)
+    nombre = request.POST.get("name",None)
+    detalle = request.POST["report"]
     data= {'result':False}
     if detalle != ""  and len(detalle) <= 600:
         p= Denuncia(idusuario=idusuario, idperdido= idperdido, detalle=detalle,nombre=nombre)
