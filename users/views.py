@@ -6,6 +6,7 @@ from users.models import Perdidos
 from users.models import Categoria
 from users.models import Denuncia
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
 
 import json
 import psycopg2
