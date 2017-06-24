@@ -4,6 +4,7 @@ from users.models import Usuarios
 from users.models import Pista
 from users.models import Perdidos
 from users.models import Categoria
+from users.models import Denuncia
 from django.core import serializers
 
 import json
@@ -176,7 +177,29 @@ def clue(request):
 
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
+def report(request):
+    idusuario = request.GET["idUsuario"]
+    idperdido = request.GET["idPerdido"]
+    dni = request.GET["DNI"]
+    nombre = request.GET["Nombre"]
+    detalle = request.GET["Detalle"]
+    data= {'resultado':False}
+    #conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
 
+    if detalle != "" and  dni != "" and len(detalle) <= 600 and len(Dni) <= 20:
+        #valores = (idUsuario, idPerdido, asunto,descripcion)
+        #cursor= conn.cursor()
+        #query = "INSERT INTO pista (idusuario, idperdido, asunto, descripcion) VALUES ('%s','%s','%s','%s')" % valores
+        #cursor.execute(query)
+        #conn.commit()
+        p= Pista(idusuario=idusuario, idperdido= idperdido, dni= dni, detalle=detalle,nombre=nombre)
+        p.save()
+        data= {'resultado': True}
+        json_data= json.dumps(data)
+        return HttpResponse(json_data, content_type= 'application/json')
+
+    json_data= json.dumps(data)
+    return HttpResponse(json_data, content_type= 'application/json')
 
 def test(request):
     lista_usuarios= Usuarios.objects.all()
