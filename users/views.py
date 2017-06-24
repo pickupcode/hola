@@ -63,9 +63,9 @@ def register(request):
     nombrein= request.GET["name"]
     usuarioin= request.GET["username"]
     passwordin= request.GET["password"]
-    dniin= request.GET["dni"]
-    emailin= request.GET["email"]
-    edadin = request.GET["edad"]
+    dniin= request.GET.get("dni",None)
+    emailin= request.GET.get("email",None)
+    edadin = request.GET.get("edad",None)
     usuario_jango= Usuarios.objects.filter(usuario=usuarioin)
     #for usuario in usuario_jango:
         #print("existe?")
