@@ -101,3 +101,9 @@ def test(request):
     data = {'test' : "Ay Lmao ay lmao"}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
+
+
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+  def view_without_csrf_protection(request):
+    pass
