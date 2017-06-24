@@ -178,11 +178,11 @@ def clue(request):
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 def report(request):
-    idusuario = request.GET["idUsuario", False]
-    idperdido = request.GET["idPerdido", False]
-    dni = request.GET["DNI",False]
-    nombre = request.GET["Nombre",False]
-    detalle = request.GET["Detalle", False]
+    idusuario = request.GET("idUsuario", False)
+    idperdido = request.GET("idPerdido", False)
+    dni = request.GET["DNI"]
+    nombre = request.GET["Nombre"]
+    detalle = request.GET["Detalle"]
     data= {'resultado':False}
     lista_denuncias= Denuncia.objects.all()
     json_denuncias= serializers.serialize('json',lista_denuncias)
