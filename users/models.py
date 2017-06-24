@@ -53,6 +53,9 @@ class Usuarios(models.Model):
     nombre = models.CharField(max_length=200, blank=True, null=True)
     usuario = models.CharField(max_length=60, blank=True, null=True)
     clave = models.CharField(max_length=100, blank=True, null=True)
+    dni = models.CharField(max_length=8, blank=True, null=True)
+    email = models.CharField(max_length=50, blank=True, null=True)
+    edad = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
