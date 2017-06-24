@@ -94,7 +94,7 @@ def listar(request):
     #perdido_json= serializers.serialize('json',lista_perdido)
     #print(perdido_json)
     i=0
-    j=0
+    
     data = {'categorias':[]}
     categoria = {'nombre' : "", 'perdidos' : []}
     #for perdido in lista_perdido:
