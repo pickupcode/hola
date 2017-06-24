@@ -25,7 +25,7 @@ def login(request):
                 nombre = i.nombre
                 usuario = i.usuario
                 clave = i.clave
-                data = {'nombre': nombre,'usuario': usuario, 'clave': clave}
+                data = {'name': nombre,'username': usuario}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
@@ -41,28 +41,28 @@ def register(request):
     passwordin= request.GET["password"]
     dniin= request.GET.get("dni",None)
     emailin= request.GET.get("email",None)
-    edadin = request.GET.get("edad",None)
+    edadin = request.GET.get("age",None)
     usuario_jango= Usuarios.objects.filter(usuario=usuarioin)
     user_does_exist = user_exists(usuarioin)
-    data= {'resultado':False}
+    data= {'result':False}
     if user_does_exist == False:
         p = Usuarios(nombre=nombrein, usuario=usuarioin, clave=passwordin, dni=dniin, email=emailin, edad= edadin)
         p.save()
-        data= {'resultado': True}
+        data= {'result': True}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
 def listar(request):
     lista_categoria= Categoria.objects.all().order_by('id')
     categoria_json= serializers.serialize('json',lista_categoria)
-    data = {'categorias':[]}
-    categoria = {'nombre' : "", 'perdidos' : []}
+    data = {'categories':[]}
+    categoria = {'name' : "", 'missing' : []}
     i=0
     for categ in lista_categoria.iterator():
         pk_categoria= categ.id
         lista_perdido= Perdidos.objects.filter(categoria=pk_categoria).order_by('categoria')
         perdido_json=serializers.serialize('json',lista_perdido)
-        categori= {'nombre': categ.nombre, 'perdidos': []}
+        categori= {'name': categ.nombre, 'missing': []}
         data['categorias'].append(categori)
         i= i+1
         for perdido in lista_perdido.iterator():
@@ -72,34 +72,32 @@ def listar(request):
     return HttpResponse(json_categoriasxperdidos, content_type= 'application/json')
 
 def clue(request):
-    idUsuario = request.GET["idUsuario"]
-    idPerdido = request.GET["idPerdido"]
-    asunto = request.GET["asunto"]
-    descripcion = request.GET["descripcion"]
-    data= {'resultado':False}
+    idUsuario = request.GET["idUser"]
+    idPerdido = request.GET["idLostPerson"]
+    asunto = request.GET["subject"]
+    descripcion = request.GET["description"]
+    data= {'result':False}
     if descripcion != "" and  asunto != "" and len(descripcion) <= 400 and len(asunto) <= 30:
         p= Pista(idusuario=idUsuario, idperdido= idPerdido, asunto= asunto, descripcion=descripcion)
         p.save()
-        data= {'resultado': True}
+        data= {'result': True}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
 def report(request):
-    idusuario = request.GET["idUsuario"]
-    idperdido = request.GET.get("idPerdido",None)
-    nombre = request.GET.get("Nombre",None)
-    detalle = request.GET["Detalle"]
-    data= {'resultado':False}
+    idusuario = request.GET["idUser"]
+    idperdido = request.GET.get("idLostPerson",None)
+    nombre = request.GET.get("name",None)
+    detalle = request.GET["report"]
+    data= {'result':False}
     if detalle != ""  and len(detalle) <= 600:
         p= Denuncia(idusuario=idusuario, idperdido= idperdido, detalle=detalle,nombre=nombre)
         p.save()
-        data= {'resultado': True}
-        json_data= json.dumps(data)
-        return HttpResponse(json_data, content_type= 'application/json')
+        data= {'result': True}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
 def test(request):
-    data = {'test' : "Ay Lmao ay lmao sdad2"}
+    data = {'test' : "Ay Lmao ay lmao"}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
