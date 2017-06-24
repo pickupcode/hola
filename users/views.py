@@ -12,7 +12,7 @@ import psycopg2
 import sys
 import pprint
 # Create your views here.
-
+@csrf_exempt
 def login(request):
     usuariobd= request.POST["username"]
     clavebd = request.POST["password"]
@@ -34,7 +34,7 @@ def user_exists(usuario):
     user_does_exist = usuario_jango.count() == 1
     return True if user_does_exist else False
 
-
+@csrf_exempt
 def register(request):
     nombrein= request.POST["name"]
     usuarioin= request.POST["username"]
@@ -52,6 +52,7 @@ def register(request):
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
+@csrf_exempt
 def list(request):
     lista_categoria= Categoria.objects.all().order_by('id')
     categoria_json= serializers.serialize('json',lista_categoria)
@@ -71,6 +72,7 @@ def list(request):
     json_categoriasxperdidos= json.dumps(data)
     return HttpResponse(json_categoriasxperdidos, content_type= 'application/json')
 
+@csrf_exempt
 def clue(request):
     idUsuario = request.POST["idUser"]
     idPerdido = request.POST["idLostPerson"]
@@ -84,6 +86,7 @@ def clue(request):
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
+@csrf_exempt
 def report(request):
     idusuario = request.POST["idUser"]
     idperdido = request.POST.get("idLostPerson",None)
@@ -97,13 +100,8 @@ def report(request):
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
+@csrf_exempt
 def test(request):
     data = {'test' : "Ay Lmao ay lmao"}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
-
-
-from django.views.decorators.csrf import csrf_exempt
-@csrf_exempt
-  def view_without_csrf_protection(request):
-    pass
