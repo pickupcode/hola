@@ -86,33 +86,73 @@ def register(request):
     return HttpResponse(json_data, content_type= 'application/json')
 
 def listar(request):
-    conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
-    cursor= conn.cursor()
-    #query pinta usuario y clave
-    query = "SELECT c.id, c.nombre, p.dni, p.firstname, p.edad, p.descripcion, p.lastname, p.categoria, p.imagen FROM \"Categoria\" as c join \"perdidos\" as p on c.id = p.categoria order by c.id"
-    cursor.execute(query)
-    # Result Set
-    rs = cursor.fetchall()
+    lista_categoria= Categoria.objects.all().order_by('id')
+    categoria_json= serializers.serialize('json',lista_categoria)
+    #print(categoria_json)
+    #print("otro json")
+    #perdido_json= serializers.serialize('json',lista_perdido)
+    #print(perdido_json)
+    i=0
+    j=0
     data = {'categorias':[]}
     categoria = {'nombre' : "", 'perdidos' : []}
-    current_category_index = 0
-    previous_category_index = -1
-    for result in rs:
-        current_result_category_id = result[0]
-        print(current_result_category_id)
-        previous_result_category_id = rs[rs.index(result)-1][0] if current_category_index >= 0 else ""
-        print(previous_result_category_id)
-        if current_result_category_id != previous_result_category_id:
-            previous_category_index = current_category_index
-            current_category_index += 1
-            categoria = {'nombre' : result[1], 'perdidos' : []}
-            data['categorias'].append(categoria)
-        imagenRaw = str(result[8])
-        perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : result[5], 'imagen' : imagenRaw}
-        data['categorias'][previous_category_index]['perdidos'].append(perdido)
+    #for perdido in lista_perdido:
+        #print(perdido.firstname)
+    print("ids categorias")
+    for categ in lista_categoria.iterator():
 
-    json_data= json.dumps(data)
-    return HttpResponse(json_data, content_type= 'application/json')
+        pk_categoria= categ.id
+        print(pk_categoria)
+        lista_perdido= Perdidos.objects.filter(categoria=pk_categoria).order_by('categoria')
+        perdido_json=serializers.serialize('json',lista_perdido)
+        #print(perdido_json)
+        categori= {'nombre': categ.nombre, 'perdidos': []}
+        data['categorias'].append(categori)
+        i= i+1
+        for perdido in lista_perdido.iterator():
+
+            perdid= {'nombre': perdido.firstname, 'apellido': perdido.lastname, 'dni': perdido.dni, 'age': perdido.edad, 'description': perdido.descripcion, 'imagen': perdido.imagen}
+            #print(perdido)
+            #print(data['categorias'][0]['perdidos'])
+            data['categorias'][i-1]['perdidos'].append(perdid)
+
+
+
+    #print(data)
+    json_categoriasxperdidos= json.dumps(data)
+
+
+
+    #data = {'test' : "Ay Lmao ay lmao sdad2"}
+    #json_data= json.dumps(data)
+    return HttpResponse(json_categoriasxperdidos, content_type= 'application/json')
+    #conn = psycopg2.connect("dbname='ddgrh85co1hhsd' user='txmdzfeapxbwss' password='27fd84a2984d45a8416526ce6c1dae1985e8a2de97970fcf21739e79106e6299' host='ec2-174-129-227-116.compute-1.amazonaws.com' port='5432'")
+    #cursor= conn.cursor()
+    #query pinta usuario y clave
+    #query = "SELECT c.id, c.nombre, p.dni, p.firstname, p.edad, p.descripcion, p.lastname, p.categoria, p.imagen FROM \"Categoria\" as c join \"perdidos\" as p on c.id = p.categoria order by c.id"
+    #cursor.execute(query)
+    # Result Set
+    #rs = cursor.fetchall()
+    #data = {'categorias':[]}
+    #categoria = {'nombre' : "", 'perdidos' : []}
+    #current_category_index = 0
+    #previous_category_index = -1
+    #for result in rs:
+        #current_result_category_id = result[0]
+        #print(current_result_category_id)
+        #previous_result_category_id = rs[rs.index(result)-1][0] if current_category_index >= 0 else ""
+        #print(previous_result_category_id)
+        #if current_result_category_id != previous_result_category_id:
+            #previous_category_index = current_category_index
+            #current_category_index += 1
+            #categoria = {'nombre' : result[1], 'perdidos' : []}
+            #data['categorias'].append(categoria)
+        #imagenRaw = str(result[8])
+        #perdido = {'nombre' : result[3], 'apellido' : result[6], 'dni' : result[2], 'age' : result[4], 'description' : result[5], 'imagen' : imagenRaw}
+        #data['categorias'][previous_category_index]['perdidos'].append(perdido)
+
+    #json_data= json.dumps(data)
+    #return HttpResponse(json_data, content_type= 'application/json')
 
 def clue(request):
     idUsuario = request.GET["idUsuario"]
