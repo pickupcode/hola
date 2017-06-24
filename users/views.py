@@ -15,8 +15,8 @@ import pprint
 # Create your views here.
 @csrf_exempt
 def login(request):
-    usuariobd= request.POST["username"]
-    clavebd = request.POST["password"]
+    usuariobd= request.POST.get("username")
+    clavebd = request.POST.get("password")
     usuario_jango= Usuarios.objects.filter(usuario=usuariobd)
     for i in usuario_jango.iterator():
         data= {'nombre' : "", 'usuario' : "", 'clave' : ""}
@@ -37,9 +37,9 @@ def user_exists(usuario):
 
 @csrf_exempt
 def register(request):
-    nombrein= request.POST["name"]
-    usuarioin= request.POST["username"]
-    passwordin= request.POST["password"]
+    nombrein= request.POST.get("name")
+    usuarioin= request.POST.get("username")
+    passwordin= request.POST.get("password")
     dniin= request.POST.get("dni",None)
     emailin= request.POST.get("email",None)
     edadin = request.POST.get("age",None)
@@ -75,10 +75,10 @@ def list(request):
 
 @csrf_exempt
 def clue(request):
-    idUsuario = request.POST["idUser"]
-    idPerdido = request.POST["idLostPerson"]
-    asunto = request.POST["subject"]
-    descripcion = request.POST["description"]
+    idUsuario = request.POST.get("idUser")
+    idPerdido = request.POST.get("idLostPerson")
+    asunto = request.POST.get("subject")
+    descripcion = request.POST.get("description")
     data= {'result':False}
     if descripcion != "" and  asunto != "" and len(descripcion) <= 400 and len(asunto) <= 30:
         p= Pista(idusuario=idUsuario, idperdido= idPerdido, asunto= asunto, descripcion=descripcion)
@@ -89,10 +89,10 @@ def clue(request):
 
 @csrf_exempt
 def report(request):
-    idusuario = request.POST["idUser"]
+    idusuario = request.POST.get("idUser")
     idperdido = request.POST.get("idLostPerson",None)
     nombre = request.POST.get("name",None)
-    detalle = request.POST["report"]
+    detalle = request.POST.get("report")
     data= {'result':False}
     if detalle != ""  and len(detalle) <= 600:
         p= Denuncia(idusuario=idusuario, idperdido= idperdido, detalle=detalle,nombre=nombre)
