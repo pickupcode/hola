@@ -178,8 +178,8 @@ def clue(request):
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 def report(request):
-    idusuario = request.GET("idUsuario", False)
-    idperdido = request.GET("idPerdido", False)
+    idusuario = request.GET.get("idUsuario", False)
+    idperdido = request.GET.get("idPerdido", False)
     dni = request.GET["DNI"]
     nombre = request.GET["Nombre"]
     detalle = request.GET["Detalle"]
