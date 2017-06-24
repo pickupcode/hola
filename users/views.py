@@ -63,6 +63,9 @@ def register(request):
     nombrein= request.GET["name"]
     usuarioin= request.GET["username"]
     passwordin= request.GET["password"]
+    dniin= request.GET["dni"]
+    emailin= request.GET["email"]
+    edadin = request.GET["edad"]
     usuario_jango= Usuarios.objects.filter(usuario=usuarioin)
     #for usuario in usuario_jango:
         #print("existe?")
@@ -77,7 +80,7 @@ def register(request):
         #query = "INSERT INTO usuarios (nombre, usuario, clave) VALUES ('%s','%s','%s')" % valores
         #cursor.execute(query)
         #conn.commit()
-        p= Usuarios(nombre=nombrein, usuario=usuarioin, clave=passwordin)
+        p= Usuarios(nombre=nombrein, usuario=usuarioin, clave=passwordin, dni=dniin, email=emailin, edad= edadin)
         p.save()
         data= {'resultado': True}
         json_data= json.dumps(data)
@@ -94,7 +97,7 @@ def listar(request):
     #perdido_json= serializers.serialize('json',lista_perdido)
     #print(perdido_json)
     i=0
-    
+
     data = {'categorias':[]}
     categoria = {'nombre' : "", 'perdidos' : []}
     #for perdido in lista_perdido:
