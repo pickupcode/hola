@@ -57,6 +57,7 @@ def listar(request):
     categoria_json= serializers.serialize('json',lista_categoria)
     data = {'categorias':[]}
     categoria = {'nombre' : "", 'perdidos' : []}
+    i=0
     for categ in lista_categoria.iterator():
         pk_categoria= categ.id
         lista_perdido= Perdidos.objects.filter(categoria=pk_categoria).order_by('categoria')
