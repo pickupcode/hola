@@ -2,7 +2,17 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+class Denuncia(models.Model):
+    dni = models.CharField(max_length=10, blank=True, null=True)
+    nombre = models.CharField(max_length=50, blank=True, null=True)
+    detalle = models.CharField(max_length=600, blank=True, null=True)
+    idusuario = models.CharField(max_length=200, blank=True, null=True)
+    idperdido = models.CharField(max_length=200, blank=True, null=True)
+    iddenuncia = models.AutoField(primary_key=True)
 
+    class Meta:
+        managed = False
+        db_table = 'denuncia'
 class Categoria(models.Model):
     id = models.CharField(primary_key=True, max_length=6)
     nombre = models.CharField(max_length=50, blank=True, null=True)
