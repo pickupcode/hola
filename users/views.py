@@ -178,8 +178,8 @@ def clue(request):
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 def report(request):
-    usuarioid = request.GET["Usuarioid"]
-    perdidoid = request.GET["Perdidoid"]
+    idusuario = request.GET.get("idUsuario", False)
+    idperdido = request.GET.get("idPerdido", False)
     dni = request.GET["DNI"]
     nombre = request.GET["Nombre"]
     detalle = request.GET["Detalle"]
@@ -195,7 +195,7 @@ def report(request):
         #query = "INSERT INTO pista (idusuario, idperdido, asunto, descripcion) VALUES ('%s','%s','%s','%s')" % valores
         #cursor.execute(query)
         #conn.commit()
-        p= Denuncia(idusuario=usuarioid, idperdido= perdidoid, dni= dni, detalle=detalle,nombre=nombre)
+        p= Denuncia(idusuario=idusuario, idperdido= idperdido, dni= dni, detalle=detalle,nombre=nombre)
         p.save()
         data= {'resultado': True}
         json_data= json.dumps(data)
