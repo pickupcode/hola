@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from django.db import models
 
 class Denuncia(models.Model):
-    dni = models.CharField(max_length=10, blank=True, null=True)
     nombre = models.CharField(max_length=50, blank=True, null=True)
     detalle = models.CharField(max_length=600, blank=True, null=True)
     idusuario = models.CharField(max_length=200, blank=True, null=True)

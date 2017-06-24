@@ -85,13 +85,12 @@ def clue(request):
 
 def report(request):
     idusuario = request.GET["idUsuario"]
-    idperdido = request.GET["idPerdido"]
-    dni = request.GET["DNI"]
-    nombre = request.GET["Nombre"]
+    idperdido = request.GET.get("idPerdido",None)
+    nombre = request.GET.get("Nombre",None)
     detalle = request.GET["Detalle"]
     data= {'resultado':False}
-    if detalle != "" and  dni != "" and len(detalle) <= 600 and len(dni) <= 10:
-        p= Denuncia(idusuario=idusuario, idperdido= idperdido, dni= dni, detalle=detalle,nombre=nombre)
+    if detalle != ""  and len(detalle) <= 600:
+        p= Denuncia(idusuario=idusuario, idperdido= idperdido, detalle=detalle,nombre=nombre)
         p.save()
         data= {'resultado': True}
         json_data= json.dumps(data)
@@ -102,4 +101,4 @@ def report(request):
 def test(request):
     data = {'test' : "Ay Lmao ay lmao sdad2"}
     json_data= json.dumps(data)
-    return HttpResponse(json_categoriasxperdidos, content_type= 'application/json')
+    return HttpResponse(json_data, content_type= 'application/json')
