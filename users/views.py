@@ -192,7 +192,7 @@ def report(request):
         #query = "INSERT INTO pista (idusuario, idperdido, asunto, descripcion) VALUES ('%s','%s','%s','%s')" % valores
         #cursor.execute(query)
         #conn.commit()
-        p= Pista(idusuario=idusuario, idperdido= idperdido, dni= dni, detalle=detalle,nombre=nombre)
+        p= Denuncia(idusuario=idusuario, idperdido= idperdido, dni= dni, detalle=detalle,nombre=nombre)
         p.save()
         data= {'resultado': True}
         json_data= json.dumps(data)
