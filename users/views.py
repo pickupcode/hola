@@ -53,12 +53,13 @@ def register(request):
 def list(request):
     data = {'categories':[]}
     categories = Categoria.objects.all().order_by('id')
+    print(categories[0])
     missing = Perdidos.objects.all().order_by('categoria').values()
-    missing_index = 0
+    print(missing[0])
     for category in categories:
         print("TITLE")
-        while missing['categoria'] == category:
-            print("yes")
+        # while missing['categoria'] == category:
+        #     print("yes")
 
 
 
