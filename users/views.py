@@ -53,8 +53,8 @@ def register(request):
 def list(request):
     data = {'categories':[]}
     categories = Categoria.objects.all().order_by('id').values()
-    print(categories[0])
     missing = Perdidos.objects.all().order_by('categoria').values()
+    print(len(missing))
     missing_index = 0
     for category in categories:
         if missing_index == len(missing):
@@ -64,6 +64,7 @@ def list(request):
             while missing[missing_index]['categoria_id'] == category['id']:
                 missing_category['missing'].append(missing[missing_index])
                 missing_index+=1
+                print('%d' % missing_index)
         data['categories'].append(missing_category)
 
 
