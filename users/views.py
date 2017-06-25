@@ -20,7 +20,6 @@ def login(request):
     username = data['username']
     password = data['password']
     users = Usuarios.objects.filter(usuario=username, clave=password).values()
-    print('%d' % len(users))
     if len(users) != 1:
         data = {'username' : ""}
     else:
@@ -32,27 +31,39 @@ def login(request):
 
 
 def user_exists(usuario):
-    usuario_jango= Usuarios.objects.filter(usuario=usuario)
-    user_does_exist = usuario_jango.count() == 1
-    return True if user_does_exist else False
+    users = Usuarios.objects.filter(usuario=usuario)
+    return True if (len(users) != 1) else False
 
 @csrf_exempt
 def register(request):
-    nombrein= request.POST.get("name")
-    usuarioin= request.POST.get("username")
-    passwordin= request.POST.get("password")
-    dniin= request.POST.get("dni",None)
-    emailin= request.POST.get("email",None)
-    edadin = request.POST.get("age",None)
-    usuario_jango= Usuarios.objects.filter(usuario=usuarioin)
-    user_does_exist = user_exists(usuarioin)
-    data= {'result':False}
-    if user_does_exist == False:
-        p = Usuarios(nombre=nombrein, usuario=usuarioin, clave=passwordin, dni=dniin, email=emailin, edad= edadin)
-        p.save()
+    data = json.loads(request.body)
+    print(data)
+    user = serializers.deserialize('json', data)
+    print(user)
+    data = {'result':False}
+    if !user_exists(user.usuario):
+        print('user does not exist')
+        user.save()
         data= {'result': True}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
+
+
+    # nombrein= request.POST.get("name")
+    # usuarioin= request.POST.get("username")
+    # passwordin= request.POST.get("password")
+    # dniin= request.POST.get("dni",None)
+    # emailin= request.POST.get("email",None)
+    # edadin = request.POST.get("age",None)
+    # usuario_jango= Usuarios.objects.filter(usuario=usuarioin)
+    # user_does_exist = user_exists(usuarioin)
+    # data= {'result':False}
+    # if user_does_exist == False:
+    #     p = Usuarios(nombre=nombrein, usuario=usuarioin, clave=passwordin, dni=dniin, email=emailin, edad= edadin)
+    #     p.save()
+    #     data= {'result': True}
+    # json_data= json.dumps(data)
+    # return HttpResponse(json_data, content_type= 'application/json')
 
 @csrf_exempt
 def list(request):
