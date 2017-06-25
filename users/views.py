@@ -20,7 +20,7 @@ def login(request):
     username = data['username']
     password = data['password']
     users = Usuarios.objects.filter(usuario=username, clave=password).values()
-    print(users)
+    print('%d' % len(users))
     if len(users) != 1:
         data = {'username' : ""}
     else:
