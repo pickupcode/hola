@@ -27,12 +27,7 @@ def login(request):
                 clave = i.clave
                 data = {'name': nombre,'username': usuario}
     json_data= json.dumps(data)
-    # response = HttpResponse(json_data, content_type= 'application/json')
-    # response.__delitem__("Connection")
-    # return response
-    # response = HttpResponse(json_data, content_type= 'application/json')
-    # HttpResponse(json_data, content_type= 'application/json').__delitem__("Connection")
-    return HttpResponse(json_data, content_type= 'application/json').__delitem__('Connection')
+    return HttpResponse(json_data, content_type= 'application/json')
 
 def user_exists(usuario):
     usuario_jango= Usuarios.objects.filter(usuario=usuario)
