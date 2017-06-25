@@ -54,15 +54,18 @@ def list(request):
     data = {'categories':[]}
     categories = Categoria.objects.all().order_by('id').values()
     missing = Perdidos.objects.all().order_by('categoria').values()
+    print('%d' % len(missing))
     missing_index = 0
     for category in categories:
         if missing_index == len(missing) - 1:
+            print("Entro al if")
             break
         else:
             missing_category = {'name': category['nombre'], 'missing': []}
-            while (missing[missing_index]['categoria_id'] == category['id']) and (missing_index =< len(missing) - 1) :
+            while missing[missing_index]['categoria_id'] == category['id']:
                 missing_category['missing'].append(missing[missing_index])
                 missing_index+=1
+                print('%d' % missing_index)
         data['categories'].append(missing_category)
     json_categoriasxperdidos= json.dumps(data)
     return HttpResponse(json_categoriasxperdidos, content_type= 'application/json')
