@@ -18,8 +18,8 @@ def login(request):
     usuariobd= request.POST.get("username")
     clavebd = request.POST.get("password")
     usuario_jango= Usuarios.objects.filter(usuario=usuariobd)
-    data= {'name' : "", 'username' : ""}
     for i in usuario_jango.iterator():
+        data= {'name' : "", 'username' : ""}
         if usuario_jango.count() > 0:
             if clavebd == i.clave:
                 nombre = i.nombre
@@ -28,8 +28,6 @@ def login(request):
                 data = {'name': nombre,'username': usuario}
                 json_data= json.dumps(data)
                 return HttpResponse(json_data, content_type= 'application/json')
-    json_data= json.dumps(data)
-    return HttpResponse(json_data, content_type= 'application/json')
 
 def user_exists(usuario):
     usuario_jango= Usuarios.objects.filter(usuario=usuario)
