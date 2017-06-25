@@ -1,12 +1,13 @@
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core import serializers
 from users.models import Usuarios
 from users.models import Pista
 from users.models import Perdidos
 from users.models import Categoria
 from users.models import Denuncia
-from django.core import serializers
-from django.views.decorators.csrf import csrf_exempt
+
 
 import json
 import psycopg2
@@ -16,21 +17,17 @@ import pprint
 @csrf_exempt
 def login(request):
     data = json.loads(request.body)
-    usuariobd= data['username']
-    print(usuariobd)
-    clavebd = request.POST.get("password")
-    print(clavebd)
-    usuario_jango= Usuarios.objects.filter(usuario=usuariobd)
-    data= {'name' : "", 'username' : ""}
-    for i in usuario_jango.iterator():
-        if usuario_jango.count() > 0:
-            if clavebd == i.clave:
-                nombre = i.nombre
-                usuario = i.usuario
-                clave = i.clave
-                data = {'name': nombre,'username': usuario}
-                json_data= json.dumps(data)
-                return HttpResponse(json_data, content_type= 'application/json')
+    username = data['username']
+    password = data['password']
+    users = Usuarios.objects.filter(usuario=usuariobd, clave=password)
+    if len(users) != 1:
+        data = {'username' : ""}
+    else:
+        user = users[0]
+        data = serializers.serialize('json', user)
+    json_data= json.dumps(data)
+    return HttpResponse(json_data, content_type= 'application/json')
+
 
 def user_exists(usuario):
     usuario_jango= Usuarios.objects.filter(usuario=usuario)
