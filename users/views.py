@@ -60,30 +60,28 @@ def list(request):
     data = {'categories':[]}
     categories = Categoria.objects.all().order_by('id').values()
     missing = Perdidos.objects.all().order_by('categoria').values()
-    print('%d' % len(missing))
     missing_index = 0
     for category in categories:
         missing_category = {'name': category['nombre'], 'missing': []}
         while missing_index < len(missing) and missing[missing_index]['categoria_id'] == category['id']:
             missing_category['missing'].append(missing[missing_index])
             missing_index+=1
-            print('Inside while missing: %d' % missing_index)
         data['categories'].append(missing_category)
         if not missing_index < len(missing):
             break
-        print('end')
     json_categoriasxperdidos= json.dumps(data)
     return HttpResponse(json_categoriasxperdidos, content_type= 'application/json')
 
 @csrf_exempt
 def clue(request):
-    idUsuario = request.POST.get("idUser")
-    idPerdido = request.POST.get("idLostPerson")
-    asunto = request.POST.get("subject")
-    descripcion = request.POST.get("description")
+    data = json.loads(request.body)
+    username = data['idUser']
+    dni_missing = data['idLostPerson']
+    subject = data['subject']
+    clue = data['description']
     data= {'result':False}
-    if descripcion != "" and  asunto != "" and len(descripcion) <= 400 and len(asunto) <= 30:
-        p= Pista(idusuario=idUsuario, idperdido= idPerdido, asunto= asunto, descripcion=descripcion)
+    if clue != "" and  subject != "" and len(clue) <= 400 and len(subject) <= 30:
+        p= Pista(idusuario = username, idperdido = dni_missing, asunto = subject, descripcion = clue)
         p.save()
         data= {'result': True}
     json_data= json.dumps(data)
