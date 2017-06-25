@@ -58,8 +58,8 @@ def list(request):
     print(missing[0])
     for category in categories:
         print("TITLE")
-        # while missing['categoria'] == category:
-        #     print("yes")
+        while missing['categoria_id'] == category['id']:
+            print("yes")
 
 
 
