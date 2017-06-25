@@ -16,7 +16,7 @@ import pprint
 # Create your views here.
 
 def incorrect_request_metod():
-    return HttpResponse(status = 404)
+    return HttpResponse(status = 405)
 
 @csrf_exempt
 def login(request):
