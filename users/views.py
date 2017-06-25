@@ -15,6 +15,7 @@ import pprint
 # Create your views here.
 @csrf_exempt
 def login(request):
+    print("raw: %s" % request.body)
     print(request.body.decode('utf-8'))
     usuariobd= request.POST.get('username')
     print(usuariobd)
