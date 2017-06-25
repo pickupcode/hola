@@ -27,7 +27,9 @@ def login(request):
                 clave = i.clave
                 data = {'name': nombre,'username': usuario}
     json_data= json.dumps(data)
-    return HttpResponse(json_data, content_type= 'application/json')
+    response = HttpResponse(json_data, content_type= 'application/json')
+    response.__setitem__("Connection", "close")
+    return response
 
 def user_exists(usuario):
     usuario_jango= Usuarios.objects.filter(usuario=usuario)
@@ -50,7 +52,8 @@ def register(request):
         p.save()
         data= {'result': True}
     json_data= json.dumps(data)
-    return HttpResponse(json_data, content_type= 'application/json')
+    response = HttpResponse(json_data, content_type= 'application/json')
+    return response
 
 @csrf_exempt
 def list(request):
