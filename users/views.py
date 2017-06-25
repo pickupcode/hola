@@ -36,7 +36,7 @@ def user_exists(usuario):
 def register(request):
     data = json.loads(request.body)
     print(data)
-    users = serializers.deserialize('json', data)
+    users = serializers.deserialize('json', data).values()
     print(users)
     data = {'result':False}
     # if not user_exists(user.usuario):
