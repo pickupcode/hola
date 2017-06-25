@@ -15,23 +15,44 @@ import sys
 import pprint
 # Create your views here.
 
-def incorrect_request_metod():
+# MARK: - Check Methods
+def incorrect_request_method():
     return HttpResponse('<h1>Ayy Lmao! This method is not allowed my dude</h1>', status = 405, content_type = 'text/html')
 
+def check_parameters_data(*params):
+    for param in params:
+        if param is None:
+            return HttpResponse('<h1>Ayy Lmao! You are missing some data my dude</h1>', status = 400, content_type = 'text/html')
+    return None
+
+def incorrect_content_type():
+    return HttpResponse('<h1>Ayy Lmao! Not a JSON my dude</h1>', status = 415, content_type = 'text/html')
+
+# MARK: - BusinessLogic Methods
 @csrf_exempt
 def login(request):
+    # Check method
     if request.method != "POST":
-        return incorrect_request_metod()
+        return incorrect_request_method()
+    # Check content type
+    if request.content_type != "application/json":
+        return incorrect_content_type()
 
     data = json.loads(request.body)
-    username = data['username']
-    password = data['password']
+    username = data.get('username', None)
+    password = data('password', None)
+    # Check parameters
+    is_missing_parameters = check_parameters_data(username, password)
+    if is_missing_parameters is not None:
+        return is_missing_parameters
+
     users = Usuarios.objects.filter(usuario=username, clave=password).values()
     if len(users) != 1:
         data = {'username' : ""}
     else:
         user = users[0]
         data = user
+        data.pop('clave', None)
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
