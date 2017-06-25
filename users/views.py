@@ -58,7 +58,7 @@ def list(request):
     missing_index = 0
     is_in_range = missing_index < len(missing)
     for category in categories:
-        print('Categoria: %d' % categories.index(category))
+        print('Categoria: %s' % category['id'])
         category_does_match = missing[missing_index]['categoria_id'] == category['id']
         missing_category = {'name': category['nombre'], 'missing': []}
         while category_does_match and is_in_range:
