@@ -24,7 +24,6 @@ def login(request):
         data = {'username' : ""}
     else:
         user = users[0]
-        # data = serializers.serialize('json', user)
         data = user
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
@@ -41,7 +40,7 @@ def register(request):
     user = serializers.deserialize('json', data)
     print(user)
     data = {'result':False}
-    if !user_exists(user.usuario):
+    if not user_exists(user.usuario):
         print('user does not exist')
         user.save()
         data= {'result': True}
