@@ -28,7 +28,6 @@ def login(request):
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
-
 def user_exists(usuario):
     users = Usuarios.objects.filter(usuario=usuario)
     return True if (len(users) != 1) else False
@@ -39,12 +38,11 @@ def register(request):
     print(data)
     users = serializers.deserialize('json', data)
     print(users)
-    print('%d' % len(users))
     data = {'result':False}
-    if not user_exists(user.usuario):
-        print('user does not exist')
-        user.save()
-        data= {'result': True}
+    # if not user_exists(user.usuario):
+    #     print('user does not exist')
+    #     user.save()
+    #     data= {'result': True}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
