@@ -30,12 +30,11 @@ def login(request):
 
 def user_exists(usuario):
     users = Usuarios.objects.filter(usuario=usuario)
-    return True if not (len(users) != 1) else False
+    return True if len(users) == 1 else False
 
 @csrf_exempt
 def register(request):
     data = json.loads(request.body)
-    print(data)
     if not user_exists(data['username']):
         user = Usuarios(nombre = data['name'],
                         usuario = data['username'],
@@ -43,49 +42,42 @@ def register(request):
                         dni = data.get('dni', None),
                         email = data.get('email', None),
                         edad = data.get('age', None))
-        print(user)
         user.save()
         data= {'result': True}
     else:
         data = {'result':False}
-    print(data)
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
-
-    # nombrein= request.POST.get("name")
-    # usuarioin= request.POST.get("username")
-    # passwordin= request.POST.get("password")
-    # dniin= request.POST.get("dni",None)
-    # emailin= request.POST.get("email",None)
-    # edadin = request.POST.get("age",None)
-    # usuario_jango= Usuarios.objects.filter(usuario=usuarioin)
-    # user_does_exist = user_exists(usuarioin)
-    # data= {'result':False}
-    # if user_does_exist == False:
-    #     p = Usuarios(nombre=nombrein, usuario=usuarioin, clave=passwordin, dni=dniin, email=emailin, edad= edadin)
-    #     p.save()
-    #     data= {'result': True}
-    # json_data= json.dumps(data)
-    # return HttpResponse(json_data, content_type= 'application/json')
-
 @csrf_exempt
 def list(request):
-    lista_categoria= Categoria.objects.all().order_by('id')
-    categoria_json= serializers.serialize('json',lista_categoria)
     data = {'categories':[]}
-    categoria = {'name' : "", 'missing' : []}
-    i=0
-    for categ in lista_categoria.iterator():
-        pk_categoria= categ.id
-        lista_perdido= Perdidos.objects.filter(categoria=pk_categoria).order_by('categoria')
-        perdido_json=serializers.serialize('json',lista_perdido)
-        categori= {'name': categ.nombre, 'missing': []}
-        data['categorias'].append(categori)
-        i= i+1
-        for perdido in lista_perdido.iterator():
-            perdid= {'nombre': perdido.firstname, 'apellido': perdido.lastname, 'dni': perdido.dni, 'age': perdido.edad, 'description': perdido.descripcion, 'imagen': perdido.imagen}
-            data['categorias'][i-1]['perdidos'].append(perdid)
+    categories = Categoria.objects.all().order_by('id')
+    for category in categories:
+        print(category)
+
+
+
+
+
+
+
+
+    # lista_categoria= Categoria.objects.all().order_by('id')
+    # categoria_json= serializers.serialize('json',lista_categoria)
+    # data = {'categories':[]}
+    # categoria = {'name' : "", 'missing' : []}
+    # i=0
+    # for categ in lista_categoria.iterator():
+    #     pk_categoria= categ.id
+    #     lista_perdido= Perdidos.objects.filter(categoria=pk_categoria).order_by('categoria')
+    #     perdido_json=serializers.serialize('json',lista_perdido)
+    #     categori= {'name': categ.nombre, 'missing': []}
+    #     data['categorias'].append(categori)
+    #     i= i+1
+    #     for perdido in lista_perdido.iterator():
+    #         perdid= {'nombre': perdido.firstname, 'apellido': perdido.lastname, 'dni': perdido.dni, 'age': perdido.edad, 'description': perdido.descripcion, 'imagen': perdido.imagen}
+    #         data['categorias'][i-1]['perdidos'].append(perdid)
     json_categoriasxperdidos= json.dumps(data)
     return HttpResponse(json_categoriasxperdidos, content_type= 'application/json')
 
