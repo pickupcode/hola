@@ -52,7 +52,7 @@ def register(request):
 @csrf_exempt
 def list(request):
     data = {'categories':[]}
-    categories = Categoria.objects.all().order_by('id')
+    categories = Categoria.objects.all().order_by('id').values()
     print(categories[0])
     missing = Perdidos.objects.all().order_by('categoria').values()
     print(missing[0])
