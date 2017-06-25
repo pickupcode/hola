@@ -54,43 +54,16 @@ def list(request):
     data = {'categories':[]}
     categories = Categoria.objects.all().order_by('id').values()
     missing = Perdidos.objects.all().order_by('categoria').values()
-    print(len(missing))
     missing_index = 0
     for category in categories:
-        if missing_index == len(missing):
+        if missing_index == len(missing) - 1:
             break
         else:
             missing_category = {'name': category['nombre'], 'missing': []}
             while missing[missing_index]['categoria_id'] == category['id']:
                 missing_category['missing'].append(missing[missing_index])
                 missing_index+=1
-                print('%d' % missing_index)
         data['categories'].append(missing_category)
-
-
-
-
-
-
-
-
-
-
-    # lista_categoria= Categoria.objects.all().order_by('id')
-    # categoria_json= serializers.serialize('json',lista_categoria)
-    # data = {'categories':[]}
-    # categoria = {'name' : "", 'missing' : []}
-    # i=0
-    # for categ in lista_categoria.iterator():
-    #     pk_categoria= categ.id
-    #     lista_perdido= Perdidos.objects.filter(categoria=pk_categoria).order_by('categoria')
-    #     perdido_json=serializers.serialize('json',lista_perdido)
-    #     categori= {'name': categ.nombre, 'missing': []}
-    #     data['categorias'].append(categori)
-    #     i= i+1
-    #     for perdido in lista_perdido.iterator():
-    #         perdid= {'nombre': perdido.firstname, 'apellido': perdido.lastname, 'dni': perdido.dni, 'age': perdido.edad, 'description': perdido.descripcion, 'imagen': perdido.imagen}
-    #         data['categorias'][i-1]['perdidos'].append(perdid)
     json_categoriasxperdidos= json.dumps(data)
     return HttpResponse(json_categoriasxperdidos, content_type= 'application/json')
 
