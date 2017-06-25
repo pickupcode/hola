@@ -35,17 +35,17 @@ def user_exists(usuario):
 @csrf_exempt
 def register(request):
     data = json.loads(request.body)
-    print(data)
-    # users = (serializers.deserialize('json', data))
-    for user in serializers.deserialize('json', data):
-        print("1")
-        print(user)
-    # print(users)
-    data = {'result':False}
-    # if not user_exists(user.usuario):
-    #     print('user does not exist')
-    #     user.save()
-    #     data= {'result': True}
+    if not user_exists(data['username']):
+        user = Usuarios(nombre = data['name'],
+                        usuario = data['username'],
+                        clave = data['password'],
+                        dni = data['dni'],
+                        email = data['email'],
+                        edad = data['age'])
+        user.save()
+        data= {'result': True}
+    else:
+        data = {'result':False}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
