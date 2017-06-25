@@ -101,7 +101,8 @@ def list(request):
         missing_category = {'name': category['nombre'], 'missing': []}
         while missing_index < len(missing) and missing[missing_index]['categoria_id'] == category['id']:
             missing_person = missing[missing_index]
-            missing_person.pop(['id','categoria_id'])
+            missing_person.pop('id', None)
+            missing_person.pop('categoria_id', None)
             missing_category['missing'].append(missing_person)
             missing_index+=1
         data['categories'].append(missing_category)
