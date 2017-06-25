@@ -28,7 +28,7 @@ def login(request):
                 data = {'name': nombre,'username': usuario}
     json_data= json.dumps(data)
     response = HttpResponse(json_data, content_type= 'application/json')
-    response.__setitem__("Connection", "close")
+    response["Connection"] = "close"
     return response
 
 def user_exists(usuario):
