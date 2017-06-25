@@ -15,9 +15,11 @@ import pprint
 # Create your views here.
 @csrf_exempt
 def login(request):
-    usuariobd= request.POST.get('username')
-    clavebd = request.POST.get("password")
     print(request.body.decode('utf-8'))
+    usuariobd= request.POST.get('username')
+    print(usuariobd)
+    clavebd = request.POST.get("password")
+    print(clavebd)
     usuario_jango= Usuarios.objects.filter(usuario=usuariobd)
     data= {'name' : "", 'username' : ""}
     for i in usuario_jango.iterator():
