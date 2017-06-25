@@ -40,7 +40,7 @@ def login(request):
 
     data = json.loads(request.body)
     username = data.get('username', None)
-    password = data('password', None)
+    password = data.get('password', None)
     # Check parameters
     is_missing_parameters = check_parameters_data(username, password)
     if is_missing_parameters is not None:
