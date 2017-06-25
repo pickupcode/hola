@@ -19,12 +19,13 @@ def login(request):
     data = json.loads(request.body)
     username = data['username']
     password = data['password']
-    users = Usuarios.objects.filter(usuario=username, clave=password)
+    users = Usuarios.objects.filter(usuario=username, clave=password).values()
     if len(users) != 1:
         data = {'username' : ""}
     else:
         user = users[0]
-        data = serializers.serialize('json', user)
+        # data = serializers.serialize('json', user)
+        data = user
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
