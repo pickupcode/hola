@@ -56,13 +56,14 @@ def list(request):
     missing = Perdidos.objects.all().order_by('categoria').values()
     print('%d' % len(missing))
     missing_index = 0
+    should_iterate = missing[missing_index]['categoria_id'] == category['id'] and missing_index < len(missing)
     for category in categories:
-        if missing_index == len(missing) - 1:
+        if not missing_index < len(missing):
             print("Entro al if")
             break
         else:
             missing_category = {'name': category['nombre'], 'missing': []}
-            while missing[missing_index]['categoria_id'] == category['id']:
+            while should_iterate:
                 missing_category['missing'].append(missing[missing_index])
                 missing_index+=1
                 print('%d' % missing_index)
