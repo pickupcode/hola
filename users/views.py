@@ -58,16 +58,23 @@ def list(request):
     missing_index = 0
     is_in_range = missing_index < len(missing)
     for category in categories:
+        print('Categoria: %d' % categories.index(category))
         category_does_match = missing[missing_index]['categoria_id'] == category['id']
         missing_category = {'name': category['nombre'], 'missing': []}
         while category_does_match and is_in_range:
             missing_category['missing'].append(missing[missing_index])
             missing_index+=1
-            print('%d' % missing_index)
+            print('Inside while missing: %d' % missing_index)
+            print('Inside while does_match: %s' % category_does_match)
+            print('Inside while in_range: %s' % is_in_range)
         data['categories'].append(missing_category)
+        print('Outside while missing: %d' % missing_index)
+        print('Outside while does_match: %s' % category_does_match)
+        print('Outside while in_range: %s' % is_in_range)
         if not is_in_range:
             print("Entro al if")
             break
+        print('end')
     json_categoriasxperdidos= json.dumps(data)
     return HttpResponse(json_categoriasxperdidos, content_type= 'application/json')
 
