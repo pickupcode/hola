@@ -55,10 +55,11 @@ def list(request):
     categories = Categoria.objects.all().order_by('id').values()
     print(categories[0])
     missing = Perdidos.objects.all().order_by('categoria').values()
-    print(missing[0])
+    missing_index = 0
     for category in categories:
         print("TITLE")
-        while missing['categoria_id'] == category['id']:
+        while missing[missing_index]['categoria_id'] == category['id']:
+            missing_index+=1
             print("yes")
 
 
