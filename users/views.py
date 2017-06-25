@@ -16,7 +16,7 @@ import pprint
 # Create your views here.
 
 def incorrect_request_metod():
-    return HttpResponse('<h1>Ayy Lmao! This method is not allowed my dude</h1>'status = 405, content_type = 'text/html')
+    return HttpResponse('<h1>Ayy Lmao! This method is not allowed my dude</h1>', status = 405, content_type = 'text/html')
 
 @csrf_exempt
 def login(request):
