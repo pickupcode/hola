@@ -57,8 +57,8 @@ def list(request):
     print('%d' % len(missing))
     missing_index = 0
     for category in categories:
-        should_iterate = missing[missing_index]['categoria_id'] == category['id'] and missing_index < len(missing)
-        if not missing_index < len(missing):
+        should_iterate = missing[missing_index]['categoria_id'] == category['id'] and missing_index < len(missing) - 1
+        if not missing_index < len(missing) - 1:
             print("Entro al if")
             break
         else:
