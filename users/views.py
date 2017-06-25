@@ -60,7 +60,7 @@ def list(request):
             break
         else:
             missing_category = {'name': category['nombre'], 'missing': []}
-            while missing[missing_index]['categoria_id'] == category['id']:
+            while (missing[missing_index]['categoria_id'] == category['id']) and (missing_index =< len(missing) - 1) :
                 missing_category['missing'].append(missing[missing_index])
                 missing_index+=1
         data['categories'].append(missing_category)
