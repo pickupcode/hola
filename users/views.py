@@ -1,11 +1,13 @@
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core import serializers
 from users.models import Usuarios
 from users.models import Pista
 from users.models import Perdidos
 from users.models import Categoria
 from users.models import Denuncia
-from django.core import serializers
+
 
 import json
 import psycopg2
@@ -13,93 +15,105 @@ import sys
 import pprint
 # Create your views here.
 
+def incorrect_request_metod():
+    return HttpResponse('<h1>Ayy Lmao! This method is not allowed my dude</h1>', status = 405, content_type = 'text/html')
+
+@csrf_exempt
 def login(request):
-    usuariobd= request.GET["username"]
-    clavebd = request.GET["password"]
-    usuario_jango= Usuarios.objects.filter(usuario=usuariobd)
-    for i in usuario_jango.iterator():
-        data= {'nombre' : "", 'usuario' : "", 'clave' : ""}
-        if usuario_jango.count() > 0:
-            if clavebd == i.clave:
-            #Usuario y Password Correcto
-                nombre = i.nombre
-                usuario = i.usuario
-                clave = i.clave
-                data = {'nombre': nombre,'usuario': usuario, 'clave': clave}
+    if request.method != "POST":
+        return incorrect_request_metod()
+
+    data = json.loads(request.body)
+    username = data['username']
+    password = data['password']
+    users = Usuarios.objects.filter(usuario=username, clave=password).values()
+    if len(users) != 1:
+        data = {'username' : ""}
+    else:
+        user = users[0]
+        data = user
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
 def user_exists(usuario):
-    usuario_jango= Usuarios.objects.filter(usuario=usuario)
-    user_does_exist = usuario_jango.count() == 1
-    return True if user_does_exist else False
+    users = Usuarios.objects.filter(usuario=usuario)
+    return True if len(users) == 1 else False
 
-
+@csrf_exempt
 def register(request):
-    nombrein= request.GET["name"]
-    usuarioin= request.GET["username"]
-    passwordin= request.GET["password"]
-    dniin= request.GET.get("dni",None)
-    emailin= request.GET.get("email",None)
-    edadin = request.GET.get("edad",None)
-    usuario_jango= Usuarios.objects.filter(usuario=usuarioin)
-    user_does_exist = user_exists(usuarioin)
-    data= {'resultado':False}
-    if user_does_exist == False:
-        p = Usuarios(nombre=nombrein, usuario=usuarioin, clave=passwordin, dni=dniin, email=emailin, edad= edadin)
-        p.save()
-        data= {'resultado': True}
+    if request.method != "POST":
+        return incorrect_request_metod()
+
+    data = json.loads(request.body)
+    if not user_exists(data['username']):
+        user = Usuarios(nombre = data['name'],
+                        usuario = data['username'],
+                        clave = data['password'],
+                        dni = data.get('dni', None),
+                        email = data.get('email', None),
+                        edad = data.get('age', None))
+        user.save()
+        data= {'result': True}
+    else:
+        data = {'result': False}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
-def listar(request):
-    lista_categoria= Categoria.objects.all().order_by('id')
-    categoria_json= serializers.serialize('json',lista_categoria)
-    data = {'categorias':[]}
-    categoria = {'nombre' : "", 'perdidos' : []}
-    i=0
-    for categ in lista_categoria.iterator():
-        pk_categoria= categ.id
-        lista_perdido= Perdidos.objects.filter(categoria=pk_categoria).order_by('categoria')
-        perdido_json=serializers.serialize('json',lista_perdido)
-        categori= {'nombre': categ.nombre, 'perdidos': []}
-        data['categorias'].append(categori)
-        i= i+1
-        for perdido in lista_perdido.iterator():
-            perdid= {'nombre': perdido.firstname, 'apellido': perdido.lastname, 'dni': perdido.dni, 'age': perdido.edad, 'description': perdido.descripcion, 'imagen': perdido.imagen}
-            data['categorias'][i-1]['perdidos'].append(perdid)
+@csrf_exempt
+def list(request):
+    data = {'categories':[]}
+    categories = Categoria.objects.all().order_by('id').values()
+    missing = Perdidos.objects.all().order_by('categoria').values()
+    missing_index = 0
+    for category in categories:
+        missing_category = {'name': category['nombre'], 'missing': []}
+        while missing_index < len(missing) and missing[missing_index]['categoria_id'] == category['id']:
+            missing_category['missing'].append(missing[missing_index])
+            missing_index+=1
+        data['categories'].append(missing_category)
+        if not missing_index < len(missing):
+            break
     json_categoriasxperdidos= json.dumps(data)
     return HttpResponse(json_categoriasxperdidos, content_type= 'application/json')
 
+@csrf_exempt
 def clue(request):
-    idUsuario = request.GET["idUsuario"]
-    idPerdido = request.GET["idPerdido"]
-    asunto = request.GET["asunto"]
-    descripcion = request.GET["descripcion"]
-    data= {'resultado':False}
-    if descripcion != "" and  asunto != "" and len(descripcion) <= 400 and len(asunto) <= 30:
-        p= Pista(idusuario=idUsuario, idperdido= idPerdido, asunto= asunto, descripcion=descripcion)
+    if request.method != "POST":
+        return incorrect_request_metod()
+
+    data = json.loads(request.body)
+    username = data['idUser']
+    dni_missing = data['idLostPerson']
+    subject = data['subject']
+    clue = data['description']
+    data= {'result': False}
+    if clue != "" and  subject != "" and len(clue) <= 400 and len(subject) <= 30:
+        p = Pista(idusuario = username, idperdido = dni_missing, asunto = subject, descripcion = clue)
         p.save()
-        data= {'resultado': True}
+        data= {'result': True}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
+@csrf_exempt
 def report(request):
-    idusuario = request.GET["idUsuario"]
-    idperdido = request.GET.get("idPerdido",None)
-    nombre = request.GET.get("Nombre",None)
-    detalle = request.GET["Detalle"]
-    data= {'resultado':False}
-    if detalle != ""  and len(detalle) <= 600:
-        p= Denuncia(idusuario=idusuario, idperdido= idperdido, detalle=detalle,nombre=nombre)
+    if request.method != "POST":
+        return incorrect_request_metod()
+
+    data = json.loads(request.body)
+    username = data['idUser']
+    dni_missing = data.get("idLostPerson", None)
+    name_missing = data.get("name", None)
+    report = data['report']
+    data= {'result':False}
+    if report != ""  and len(report) <= 600:
+        p = Denuncia(idusuario = username, idperdido = dni_missing, detalle = report, nombre = name_missing)
         p.save()
-        data= {'resultado': True}
-        json_data= json.dumps(data)
-        return HttpResponse(json_data, content_type= 'application/json')
+        data= {'result': True}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
+@csrf_exempt
 def test(request):
-    data = {'test' : "Ay Lmao ay lmao sdad2"}
+    data = {'test' : "Ay Lmao ay lmao"}
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
