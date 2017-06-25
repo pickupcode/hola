@@ -37,12 +37,12 @@ def register(request):
     data = json.loads(request.body)
     print(data)
     if not user_exists(data['username']):
-        user = Usuarios(nombre = data['name'],
-                        usuario = data['username'],
-                        clave = data['password'],
-                        dni = data['dni'],
-                        email = data['email'],
-                        edad = data['age'])
+        user = Usuarios(nombre = data['name'] = None,
+                        usuario = data['username'] = None,
+                        clave = data['password'] = None,
+                        dni = data['dni'] if data['dni'] = None,
+                        email = data['email'] = None,
+                        edad = data['age'] = None)
         print(user)
         user.save()
         data= {'result': True}
