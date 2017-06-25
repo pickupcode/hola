@@ -26,6 +26,8 @@ def login(request):
                 usuario = i.usuario
                 clave = i.clave
                 data = {'name': nombre,'username': usuario}
+                json_data= json.dumps(data)
+                return HttpResponse(json_data, content_type= 'application/json')
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
