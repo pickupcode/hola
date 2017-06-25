@@ -36,8 +36,9 @@ def user_exists(usuario):
 def register(request):
     data = json.loads(request.body)
     print(data)
-    users = list(serializers.deserialize('json', data))
-    for user in users:
+    # users = (serializers.deserialize('json', data))
+    for user in serializers.deserialize('json', data):
+        print("1")
         print(user)
     # print(users)
     data = {'result':False}
