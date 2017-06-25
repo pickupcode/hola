@@ -27,8 +27,9 @@ def login(request):
                 clave = i.clave
                 data = {'name': nombre,'username': usuario}
     json_data= json.dumps(data)
-    header = {"Connection":"close"}
-    response = HttpResponse(json_data, headers = header, content_type= 'application/json')
+    response = HttpResponse(json_data, content_type= 'application/json')
+    response.__setitem__("Connection","close")
+    response.__setitem__("connection","close")
     return response
 
 def user_exists(usuario):
