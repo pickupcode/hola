@@ -62,10 +62,21 @@ def user_exists(usuario):
 
 @csrf_exempt
 def register(request):
+    # Check method
     if request.method != "POST":
-        return incorrect_request_metod()
+        return incorrect_request_method()
+    # Check content type
+    if request.content_type != "application/json":
+        return incorrect_content_type()
 
     data = json.loads(request.body)
+    # Check parameters
+    is_missing_parameters = check_parameters_data(data.get('username', None),
+                                                data.get('password', None),
+                                                data.get('name', None))
+    if is_missing_parameters is not None:
+        return is_missing_parameters
+
     if not user_exists(data['username']):
         user = Usuarios(nombre = data['name'],
                         usuario = data['username'],
@@ -99,14 +110,23 @@ def list(request):
 
 @csrf_exempt
 def clue(request):
+    # Check method
     if request.method != "POST":
-        return incorrect_request_metod()
+        return incorrect_request_method()
+    # Check content type
+    if request.content_type != "application/json":
+        return incorrect_content_type()
 
     data = json.loads(request.body)
-    username = data['idUser']
-    dni_missing = data['idLostPerson']
-    subject = data['subject']
-    clue = data['description']
+    username = data.get('idUser', None)
+    dni_missing = data.get('idLostPerson', None)
+    subject = data.get('subject', None)
+    clue = data.get('description', None)
+    # Check parameters
+    is_missing_parameters = check_parameters_data(username, dni_missing, subject, clue)
+    if is_missing_parameters is not None:
+        return is_missing_parameters
+
     data= {'result': False}
     if clue != "" and  subject != "" and len(clue) <= 400 and len(subject) <= 30:
         p = Pista(idusuario = username, idperdido = dni_missing, asunto = subject, descripcion = clue)
@@ -117,14 +137,23 @@ def clue(request):
 
 @csrf_exempt
 def report(request):
+    # Check method
     if request.method != "POST":
-        return incorrect_request_metod()
+        return incorrect_request_method()
+    # Check content type
+    if request.content_type != "application/json":
+        return incorrect_content_type()
 
     data = json.loads(request.body)
-    username = data['idUser']
+    username = data.get('idUser', None)
+    report = data.get('report', None)
+    # Check parameters
+    is_missing_parameters = check_parameters_data(username, report)
+    if is_missing_parameters is not None:
+        return is_missing_parameters
+
     dni_missing = data.get("idLostPerson", None)
     name_missing = data.get("name", None)
-    report = data['report']
     data= {'result':False}
     if report != ""  and len(report) <= 600:
         p = Denuncia(idusuario = username, idperdido = dni_missing, detalle = report, nombre = name_missing)
