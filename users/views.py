@@ -64,6 +64,8 @@ def list(request):
         while category_does_match and is_in_range:
             missing_category['missing'].append(missing[missing_index])
             missing_index+=1
+            is_in_range = missing_index < len(missing)
+            category_does_match = missing[missing_index]['categoria_id'] == category['id']
             print('Inside while missing: %d' % missing_index)
             print('Inside while does_match: %s' % category_does_match)
             print('Inside while in_range: %s' % is_in_range)
