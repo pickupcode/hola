@@ -30,11 +30,12 @@ def login(request):
 
 def user_exists(usuario):
     users = Usuarios.objects.filter(usuario=usuario)
-    return True if (len(users) != 1) else False
+    return True if not (len(users) != 1) else False
 
 @csrf_exempt
 def register(request):
     data = json.loads(request.body)
+    print(data)
     if not user_exists(data['username']):
         user = Usuarios(nombre = data['name'],
                         usuario = data['username'],
@@ -42,10 +43,12 @@ def register(request):
                         dni = data['dni'],
                         email = data['email'],
                         edad = data['age'])
+        print(user)
         user.save()
         data= {'result': True}
     else:
         data = {'result':False}
+    print(data)
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
