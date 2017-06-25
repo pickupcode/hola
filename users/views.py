@@ -16,11 +16,11 @@ import pprint
 @csrf_exempt
 def login(request):
     print("raw: %s" % request.body)
-    print(request.body.decode('utf-8'))
+    print(request.body.decode('utf-8')['username'])
     usuariobd= request.POST.get('username')
     print(usuariobd)
     clavebd = request.POST.get("password")
-    print(clavebd)
+    print(request.body.decode('utf-8')["password"])
     usuario_jango= Usuarios.objects.filter(usuario=usuariobd)
     data= {'name' : "", 'username' : ""}
     for i in usuario_jango.iterator():
