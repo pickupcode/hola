@@ -49,6 +49,12 @@ def register(request):
     json_data= json.dumps(data)
     return HttpResponse(json_data, content_type= 'application/json')
 
+def category_matches(cat_a, cat_b):
+    return True if cat_a == cat_b else False
+
+def in_range(index, length):
+    return True if missing_index < length else False
+
 @csrf_exempt
 def list(request):
     data = {'categories':[]}
@@ -56,28 +62,14 @@ def list(request):
     missing = Perdidos.objects.all().order_by('categoria').values()
     print('%d' % len(missing))
     missing_index = 0
-    is_in_range = missing_index < len(missing)
     for category in categories:
-        print('Categoria: %s' % category['id'])
-        category_does_match = missing[missing_index]['categoria_id'] == category['id']
         missing_category = {'name': category['nombre'], 'missing': []}
-        while category_does_match and is_in_range:
-            print('Inside start while missing: %d' % missing_index)
-            print('Inside start while does_match: %s' % category_does_match)
-            print('Inside start while in_range: %s' % is_in_range)
-            # missing_category['missing'].append(missing[missing_index])
+        while missing_index < len(missing) and missing[missing_index]['categoria_id'] == category['id']:
+            missing_category['missing'].append(missing[missing_index])
             missing_index+=1
-            is_in_range = missing_index < len(missing)
-            category_does_match = missing[missing_index]['categoria_id'] == category['id']
             print('Inside while missing: %d' % missing_index)
-            print('Inside while does_match: %s' % category_does_match)
-            print('Inside while in_range: %s' % is_in_range)
         data['categories'].append(missing_category)
-        print('Outside while missing: %d' % missing_index)
-        print('Outside while does_match: %s' % category_does_match)
-        print('Outside while in_range: %s' % is_in_range)
-        if not is_in_range:
-            print("Entro al if")
+        if not missing_index < len(missing):
             break
         print('end')
     json_categoriasxperdidos= json.dumps(data)
