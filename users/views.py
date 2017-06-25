@@ -18,10 +18,11 @@ def login(request):
     usuariobd= request.POST.get("username")
     clavebd = request.POST.get("password")
     usuario_jango= Usuarios.objects.filter(usuario=usuariobd)
-    data= {'name' : "", 'username' : ""}
     for i in usuario_jango.iterator():
+        data= {'nombre' : "", 'usuario' : "", 'clave' : ""}
         if usuario_jango.count() > 0:
             if clavebd == i.clave:
+            #Usuario y Password Correcto
                 nombre = i.nombre
                 usuario = i.usuario
                 clave = i.clave
