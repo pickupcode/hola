@@ -14,8 +14,15 @@ import psycopg2
 import sys
 import pprint
 # Create your views here.
+
+def incorrect_request_metod():
+    return HttpResponse(status = 404)
+
 @csrf_exempt
 def login(request):
+    if request.method != "POST":
+        return incorrect_request_metod()
+
     data = json.loads(request.body)
     username = data['username']
     password = data['password']
@@ -34,6 +41,9 @@ def user_exists(usuario):
 
 @csrf_exempt
 def register(request):
+    if request.method != "POST":
+        return incorrect_request_metod()
+
     data = json.loads(request.body)
     if not user_exists(data['username']):
         user = Usuarios(nombre = data['name'],
@@ -68,6 +78,9 @@ def list(request):
 
 @csrf_exempt
 def clue(request):
+    if request.method != "POST":
+        return incorrect_request_metod()
+
     data = json.loads(request.body)
     username = data['idUser']
     dni_missing = data['idLostPerson']
@@ -83,6 +96,9 @@ def clue(request):
 
 @csrf_exempt
 def report(request):
+    if request.method != "POST":
+        return incorrect_request_metod()
+
     data = json.loads(request.body)
     username = data['idUser']
     dni_missing = data.get("idLostPerson", None)
