@@ -57,10 +57,15 @@ def list(request):
     missing = Perdidos.objects.all().order_by('categoria').values()
     missing_index = 0
     for category in categories:
-        print("TITLE")
-        while missing[missing_index]['categoria_id'] == category['id']:
-            missing_index+=1
-            print("yes")
+        if missing_index == len(missing):
+            break
+        else:
+            missing_category = {'name': category['nombre'], 'missing': []}
+            while missing[missing_index]['categoria_id'] == category['id']:
+                missing_category['missing'].append(missing[missing_index])
+                missing_index+=1
+        data['categories'].append(missing_category)
+
 
 
 
